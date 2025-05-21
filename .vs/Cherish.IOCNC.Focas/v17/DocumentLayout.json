@@ -1,0 +1,41 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\lujianguo\\Desktop\\Cherish.IOCNC.Focas\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{DB023EA1-02CD-465A-A459-D025EFCF569D}|Cherish.IOCNC.Focas\\Cherish.IOCNC.Focas.csproj|C:\\Users\\lujianguo\\Desktop\\Cherish.IOCNC.Focas\\cherish.iocnc.focas\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{DB023EA1-02CD-465A-A459-D025EFCF569D}|Cherish.IOCNC.Focas\\Cherish.IOCNC.Focas.csproj|solutionrelative:cherish.iocnc.focas\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Form1.cs [\u8BBE\u8BA1]",
+              "DocumentMoniker": "C:\\Users\\lujianguo\\Desktop\\Cherish.IOCNC.Focas\\Cherish.IOCNC.Focas\\Form1.cs",
+              "RelativeDocumentMoniker": "Cherish.IOCNC.Focas\\Form1.cs",
+              "ToolTip": "C:\\Users\\lujianguo\\Desktop\\Cherish.IOCNC.Focas\\Cherish.IOCNC.Focas\\Form1.cs [\u8BBE\u8BA1]",
+              "RelativeToolTip": "Cherish.IOCNC.Focas\\Form1.cs [\u8BBE\u8BA1]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-29T07:39:44.024Z",
+              "IsPinned": true,
+              "EditorCaption": " [\u8BBE\u8BA1]"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{6324226f-61b6-4f28-92ee-18d4b5fe1e48}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
