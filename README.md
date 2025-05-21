@@ -13,6 +13,8 @@
 - 分步骤演示连接机床的完整流程
 - 提供 C#/C++ 示例代码（可根据实际需求补充语言）
 - 解决常见连接错误和调试技巧
+- 软件界面
+![Focas](https://github.com/user-attachments/assets/6b491777-8f0b-4ac8-8b09-6c56166134b7){: style="width:200px; height:284px"}
 
 ---
 
@@ -22,7 +24,7 @@
 [【B站搜索：cherish陆工】](https://space.bilibili.com/38361468)  
 或扫描下方二维码直达：
 
-![B站二维码](https://github.com/user-attachments/assets/63bdfedd-24b1-453e-8397-60c791a2d91f)
+![B站二维码](https://github.com/user-attachments/assets/63bdfedd-24b1-453e-8397-60c791a2d91f){: style="width:200px; height:284px"}
 
 ---
 
