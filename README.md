@@ -1,0 +1,77 @@
+# FocasDemo
+
+​**一步一步教你如何连接 Fanuc 机床，适合新手入门！​**​
+
+本项目提供完整的 Fanuc FOCAS 接口开发示例，帮助初学者快速掌握机床通信的基础操作。  
+包含代码示例、配置说明和常见问题解答，助你轻松上手！
+
+---
+
+## 📌 项目简介
+
+- 从零开始配置 Fanuc FOCAS 开发环境
+- 分步骤演示连接机床的完整流程
+- 提供 C#/C++ 示例代码（可根据实际需求补充语言）
+- 解决常见连接错误和调试技巧
+- 软件界面
+<img src="https://github.com/user-attachments/assets/6b491777-8f0b-4ac8-8b09-6c56166134b7" width="1000">
+---
+
+## 🎥 视频教程
+
+​**详细操作请观看 B 站视频讲解**​：  
+[【B站搜索：cherish陆工】](https://space.bilibili.com/38361468)  
+或扫描下方二维码直达：
+
+<img src="https://github.com/user-attachments/assets/63bdfedd-24b1-453e-8397-60c791a2d91f" width="500">
+
+---
+
+## 🛠️ 快速开始
+
+### 前置条件
+1. Fanuc 机床支持 FOCAS 协议
+2. 安装 FOCAS 驱动（如 `Fwlib32.dll`）
+3. 确保机床与电脑在同一网络
+
+### 基础连接示例（C#）
+```csharp
+   private void btn_Connect_Click(object sender, EventArgs e)
+   {
+       var prot = ushort.Parse(this.txt_Port.Text.Trim());
+       _ret = Focas1.cnc_allclibhndl3(this.txt_IP.Text.Trim(), prot, 10, out _flibhndl);
+       if(_ret == 0)
+       {
+           Print("Connect Success");
+
+           _isConnect =true;
+       }
+       else
+       {
+           Print("Connect Fail");
+           _isConnect = false;
+       }
+   }
+
+   private void btn_DisConnect_Click(object sender, EventArgs e)
+   {
+       _ret = Focas1.cnc_freelibhndl(_flibhndl);
+       if (_ret == 0)
+       {
+           Print("DisConnect Success");
+           _isConnect = false;
+       }
+       else
+       {
+           Print("DisConnect Fail");
+           _isConnect = false;
+       }
+   }
+```
+
+## 💰 打赏支持
+如果这个项目对你有帮助，刚好你也手头宽裕，欢迎打赏支持作者，量力而行！
+
+| <img src="https://github.com/user-attachments/assets/f8f134ec-22bb-4f5e-aaf1-ec605a26a1b5" width="200"> | <img src="https://github.com/user-attachments/assets/65e245ed-9cc3-440b-9f8e-570aa94b4c32" width="200"> |
+
+感谢你的支持！❤️
