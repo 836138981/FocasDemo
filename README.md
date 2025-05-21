@@ -67,3 +67,11 @@
            _isConnect = false;
        }
    }
+```
+
+## 💰 打赏支持
+如果这个项目对你有帮助，刚好你也手头宽裕，欢迎打赏支持作者，量力而行！
+
+| <img src="https://github.com/user-attachments/assets/f8f134ec-22bb-4f5e-aaf1-ec605a26a1b5" width="200"> | <img src="https://github.com/user-attachments/assets/65e245ed-9cc3-440b-9f8e-570aa94b4c32" width="200"> |
+
+感谢你的支持！❤️
