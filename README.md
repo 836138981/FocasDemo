@@ -36,10 +36,34 @@
 
 ### 基础连接示例（C#）
 ```csharp
-// 示例代码片段（根据实际项目补充）
-using FocasAPI;
-...
-int handle = Focas1.cnc_allclibhndl3("192.168.1.1", 8193, 10, out ret);
-if (ret == 0) {
-    Console.WriteLine("连接成功！");
-}
+   private void btn_Connect_Click(object sender, EventArgs e)
+   {
+       var prot = ushort.Parse(this.txt_Port.Text.Trim());
+       _ret = Focas1.cnc_allclibhndl3(this.txt_IP.Text.Trim(), prot, 10, out _flibhndl);
+       if(_ret == 0)
+       {
+           Print("Connect Success");
+
+           _isConnect =true;
+       }
+       else
+       {
+           Print("Connect Fail");
+           _isConnect = false;
+       }
+   }
+
+   private void btn_DisConnect_Click(object sender, EventArgs e)
+   {
+       _ret = Focas1.cnc_freelibhndl(_flibhndl);
+       if (_ret == 0)
+       {
+           Print("DisConnect Success");
+           _isConnect = false;
+       }
+       else
+       {
+           Print("DisConnect Fail");
+           _isConnect = false;
+       }
+   }
