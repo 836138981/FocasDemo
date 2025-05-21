@@ -11,7 +11,7 @@
 
 - 从零开始配置 Fanuc FOCAS 开发环境
 - 分步骤演示连接机床的完整流程
-- 提供 C#/C++ 示例代码（可根据实际需求补充语言）
+- 提供 C# 示例代码
 - 解决常见连接错误和调试技巧
 - 软件界面
 <img src="https://github.com/user-attachments/assets/6b491777-8f0b-4ac8-8b09-6c56166134b7" width="1000">
