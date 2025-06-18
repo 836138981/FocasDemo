@@ -37,7 +37,19 @@
             this.btn_DisConnect = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.num_RdOpHisSNo = new System.Windows.Forms.NumericUpDown();
+            this.label18 = new System.Windows.Forms.Label();
+            this.num_RdOpHisENo = new System.Windows.Forms.NumericUpDown();
+            this.btn_RdOpMsg = new System.Windows.Forms.Button();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.btn_setsystemTimer = new System.Windows.Forms.Button();
+            this.label16 = new System.Windows.Forms.Label();
+            this.num_MSec = new System.Windows.Forms.NumericUpDown();
+            this.label15 = new System.Windows.Forms.Label();
+            this.num_Minute = new System.Windows.Forms.NumericUpDown();
+            this.btn_getsystime = new System.Windows.Forms.Button();
             this.btn_writeTimer = new System.Windows.Forms.Button();
             this.cmb_TimerType = new System.Windows.Forms.ComboBox();
             this.label14 = new System.Windows.Forms.Label();
@@ -109,16 +121,16 @@
             this.btn_Clear = new System.Windows.Forms.Button();
             this.label13 = new System.Windows.Forms.Label();
             this.txt_Port = new System.Windows.Forms.TextBox();
-            this.btn_getsystime = new System.Windows.Forms.Button();
-            this.num_Minute = new System.Windows.Forms.NumericUpDown();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.num_MSec = new System.Windows.Forms.NumericUpDown();
-            this.btn_setsystemTimer = new System.Windows.Forms.Button();
+            this.btn_StartOpHis = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.groupBox8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.num_RdOpHisSNo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.num_RdOpHisENo)).BeginInit();
             this.groupBox7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.num_MSec)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.num_Minute)).BeginInit();
             this.groupBox4.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -137,8 +149,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.num_Path)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_AxisNO)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_BitNum)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.num_Minute)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.num_MSec)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -215,6 +225,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.groupBox8);
             this.tabPage1.Controls.Add(this.groupBox7);
             this.tabPage1.Controls.Add(this.groupBox4);
             this.tabPage1.Controls.Add(this.groupBox3);
@@ -228,6 +239,93 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // groupBox8
+            // 
+            this.groupBox8.Controls.Add(this.btn_StartOpHis);
+            this.groupBox8.Controls.Add(this.label19);
+            this.groupBox8.Controls.Add(this.num_RdOpHisSNo);
+            this.groupBox8.Controls.Add(this.label18);
+            this.groupBox8.Controls.Add(this.num_RdOpHisENo);
+            this.groupBox8.Controls.Add(this.btn_RdOpMsg);
+            this.groupBox8.Location = new System.Drawing.Point(20, 341);
+            this.groupBox8.Name = "groupBox8";
+            this.groupBox8.Size = new System.Drawing.Size(951, 61);
+            this.groupBox8.TabIndex = 9;
+            this.groupBox8.TabStop = false;
+            this.groupBox8.Text = "操作履历";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(167, 11);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(29, 12);
+            this.label19.TabIndex = 34;
+            this.label19.Text = "s_no";
+            // 
+            // num_RdOpHisSNo
+            // 
+            this.num_RdOpHisSNo.Location = new System.Drawing.Point(149, 26);
+            this.num_RdOpHisSNo.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.num_RdOpHisSNo.Minimum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            -2147483648});
+            this.num_RdOpHisSNo.Name = "num_RdOpHisSNo";
+            this.num_RdOpHisSNo.Size = new System.Drawing.Size(84, 21);
+            this.num_RdOpHisSNo.TabIndex = 33;
+            this.num_RdOpHisSNo.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(278, 8);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(29, 12);
+            this.label18.TabIndex = 32;
+            this.label18.Text = "e_no";
+            // 
+            // num_RdOpHisENo
+            // 
+            this.num_RdOpHisENo.Location = new System.Drawing.Point(249, 28);
+            this.num_RdOpHisENo.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.num_RdOpHisENo.Minimum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            -2147483648});
+            this.num_RdOpHisENo.Name = "num_RdOpHisENo";
+            this.num_RdOpHisENo.Size = new System.Drawing.Size(84, 21);
+            this.num_RdOpHisENo.TabIndex = 31;
+            this.num_RdOpHisENo.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            // 
+            // btn_RdOpMsg
+            // 
+            this.btn_RdOpMsg.Location = new System.Drawing.Point(11, 21);
+            this.btn_RdOpMsg.Name = "btn_RdOpMsg";
+            this.btn_RdOpMsg.Size = new System.Drawing.Size(106, 28);
+            this.btn_RdOpMsg.TabIndex = 30;
+            this.btn_RdOpMsg.Text = "获取操作履历";
+            this.btn_RdOpMsg.UseVisualStyleBackColor = true;
+            this.btn_RdOpMsg.Click += new System.EventHandler(this.btn_RdOpMsg_Click);
             // 
             // groupBox7
             // 
@@ -247,6 +345,68 @@
             this.groupBox7.TabIndex = 8;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "时间参数";
+            // 
+            // btn_setsystemTimer
+            // 
+            this.btn_setsystemTimer.Location = new System.Drawing.Point(734, 20);
+            this.btn_setsystemTimer.Name = "btn_setsystemTimer";
+            this.btn_setsystemTimer.Size = new System.Drawing.Size(106, 28);
+            this.btn_setsystemTimer.TabIndex = 30;
+            this.btn_setsystemTimer.Text = "设置系统时间";
+            this.btn_setsystemTimer.UseVisualStyleBackColor = true;
+            this.btn_setsystemTimer.Click += new System.EventHandler(this.btn_setsystemTimer_Click);
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(530, 11);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(29, 12);
+            this.label16.TabIndex = 29;
+            this.label16.Text = "毫秒";
+            // 
+            // num_MSec
+            // 
+            this.num_MSec.Location = new System.Drawing.Point(512, 26);
+            this.num_MSec.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.num_MSec.Name = "num_MSec";
+            this.num_MSec.Size = new System.Drawing.Size(84, 21);
+            this.num_MSec.TabIndex = 28;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(418, 11);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(29, 12);
+            this.label15.TabIndex = 27;
+            this.label15.Text = "分钟";
+            // 
+            // num_Minute
+            // 
+            this.num_Minute.Location = new System.Drawing.Point(400, 26);
+            this.num_Minute.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.num_Minute.Name = "num_Minute";
+            this.num_Minute.Size = new System.Drawing.Size(84, 21);
+            this.num_Minute.TabIndex = 26;
+            // 
+            // btn_getsystime
+            // 
+            this.btn_getsystime.Location = new System.Drawing.Point(619, 20);
+            this.btn_getsystime.Name = "btn_getsystime";
+            this.btn_getsystime.Size = new System.Drawing.Size(106, 28);
+            this.btn_getsystime.TabIndex = 25;
+            this.btn_getsystime.Text = "获取系统时间";
+            this.btn_getsystime.UseVisualStyleBackColor = true;
+            this.btn_getsystime.Click += new System.EventHandler(this.btn_getsystime_Click);
             // 
             // btn_writeTimer
             // 
@@ -1067,67 +1227,15 @@
             this.txt_Port.TabIndex = 12;
             this.txt_Port.Text = "8193";
             // 
-            // btn_getsystime
+            // btn_StartOpHis
             // 
-            this.btn_getsystime.Location = new System.Drawing.Point(619, 20);
-            this.btn_getsystime.Name = "btn_getsystime";
-            this.btn_getsystime.Size = new System.Drawing.Size(106, 28);
-            this.btn_getsystime.TabIndex = 25;
-            this.btn_getsystime.Text = "获取系统时间";
-            this.btn_getsystime.UseVisualStyleBackColor = true;
-            this.btn_getsystime.Click += new System.EventHandler(this.btn_getsystime_Click);
-            // 
-            // num_Minute
-            // 
-            this.num_Minute.Location = new System.Drawing.Point(400, 26);
-            this.num_Minute.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
-            this.num_Minute.Name = "num_Minute";
-            this.num_Minute.Size = new System.Drawing.Size(84, 21);
-            this.num_Minute.TabIndex = 26;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(418, 11);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(29, 12);
-            this.label15.TabIndex = 27;
-            this.label15.Text = "分钟";
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(530, 11);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(29, 12);
-            this.label16.TabIndex = 29;
-            this.label16.Text = "毫秒";
-            // 
-            // num_MSec
-            // 
-            this.num_MSec.Location = new System.Drawing.Point(512, 26);
-            this.num_MSec.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
-            this.num_MSec.Name = "num_MSec";
-            this.num_MSec.Size = new System.Drawing.Size(84, 21);
-            this.num_MSec.TabIndex = 28;
-            // 
-            // btn_setsystemTimer
-            // 
-            this.btn_setsystemTimer.Location = new System.Drawing.Point(734, 20);
-            this.btn_setsystemTimer.Name = "btn_setsystemTimer";
-            this.btn_setsystemTimer.Size = new System.Drawing.Size(106, 28);
-            this.btn_setsystemTimer.TabIndex = 30;
-            this.btn_setsystemTimer.Text = "设置系统时间";
-            this.btn_setsystemTimer.UseVisualStyleBackColor = true;
-            this.btn_setsystemTimer.Click += new System.EventHandler(this.btn_setsystemTimer_Click);
+            this.btn_StartOpHis.Location = new System.Drawing.Point(507, 21);
+            this.btn_StartOpHis.Name = "btn_StartOpHis";
+            this.btn_StartOpHis.Size = new System.Drawing.Size(106, 28);
+            this.btn_StartOpHis.TabIndex = 35;
+            this.btn_StartOpHis.Text = "开始记录";
+            this.btn_StartOpHis.UseVisualStyleBackColor = true;
+            this.btn_StartOpHis.Click += new System.EventHandler(this.btn_StartOpHis_Click);
             // 
             // Form1
             // 
@@ -1157,8 +1265,14 @@
             this.menuStrip1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.groupBox8.ResumeLayout(false);
+            this.groupBox8.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.num_RdOpHisSNo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.num_RdOpHisENo)).EndInit();
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.num_MSec)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.num_Minute)).EndInit();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.groupBox6.ResumeLayout(false);
@@ -1181,8 +1295,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.num_Path)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_AxisNO)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_BitNum)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.num_Minute)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.num_MSec)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1277,6 +1389,13 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.NumericUpDown num_Minute;
         private System.Windows.Forms.Button btn_setsystemTimer;
+        private System.Windows.Forms.GroupBox groupBox8;
+        private System.Windows.Forms.Button btn_RdOpMsg;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.NumericUpDown num_RdOpHisSNo;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.NumericUpDown num_RdOpHisENo;
+        private System.Windows.Forms.Button btn_StartOpHis;
     }
 }
 

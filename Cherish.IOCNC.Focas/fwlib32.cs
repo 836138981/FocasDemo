@@ -2438,7 +2438,7 @@ public class Focas1
     [StructLayout(LayoutKind.Sequential, Pack = 4)]
     public class REC_MDI4
     {
-        public char key_code;   /* key code */
+        public byte key_code;   /* key code */
         public char pw_flag;    /* power on flag */
         public short pth_no;     /* path index */
         public short ex_flag;    /* kxternal key flag */
