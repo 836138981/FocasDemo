@@ -38,6 +38,11 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.button26 = new System.Windows.Forms.Button();
+            this.button25 = new System.Windows.Forms.Button();
+            this.button24 = new System.Windows.Forms.Button();
+            this.button23 = new System.Windows.Forms.Button();
+            this.btn_StartOpHis = new System.Windows.Forms.Button();
             this.label19 = new System.Windows.Forms.Label();
             this.num_RdOpHisSNo = new System.Windows.Forms.NumericUpDown();
             this.label18 = new System.Windows.Forms.Label();
@@ -121,7 +126,12 @@
             this.btn_Clear = new System.Windows.Forms.Button();
             this.label13 = new System.Windows.Forms.Label();
             this.txt_Port = new System.Windows.Forms.TextBox();
-            this.btn_StartOpHis = new System.Windows.Forms.Button();
+            this.button27 = new System.Windows.Forms.Button();
+            this.button28 = new System.Windows.Forms.Button();
+            this.button29 = new System.Windows.Forms.Button();
+            this.button30 = new System.Windows.Forms.Button();
+            this.button31 = new System.Windows.Forms.Button();
+            this.button32 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -242,6 +252,16 @@
             // 
             // groupBox8
             // 
+            this.groupBox8.Controls.Add(this.button32);
+            this.groupBox8.Controls.Add(this.button31);
+            this.groupBox8.Controls.Add(this.button30);
+            this.groupBox8.Controls.Add(this.button29);
+            this.groupBox8.Controls.Add(this.button28);
+            this.groupBox8.Controls.Add(this.button27);
+            this.groupBox8.Controls.Add(this.button26);
+            this.groupBox8.Controls.Add(this.button25);
+            this.groupBox8.Controls.Add(this.button24);
+            this.groupBox8.Controls.Add(this.button23);
             this.groupBox8.Controls.Add(this.btn_StartOpHis);
             this.groupBox8.Controls.Add(this.label19);
             this.groupBox8.Controls.Add(this.num_RdOpHisSNo);
@@ -250,10 +270,60 @@
             this.groupBox8.Controls.Add(this.btn_RdOpMsg);
             this.groupBox8.Location = new System.Drawing.Point(20, 341);
             this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(951, 61);
+            this.groupBox8.Size = new System.Drawing.Size(951, 105);
             this.groupBox8.TabIndex = 9;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "操作履历";
+            // 
+            // button26
+            // 
+            this.button26.Location = new System.Drawing.Point(11, 71);
+            this.button26.Name = "button26";
+            this.button26.Size = new System.Drawing.Size(87, 28);
+            this.button26.TabIndex = 39;
+            this.button26.Text = "当前操作信息";
+            this.button26.UseVisualStyleBackColor = true;
+            this.button26.Click += new System.EventHandler(this.button26_Click);
+            // 
+            // button25
+            // 
+            this.button25.Location = new System.Drawing.Point(757, 19);
+            this.button25.Name = "button25";
+            this.button25.Size = new System.Drawing.Size(106, 28);
+            this.button25.TabIndex = 38;
+            this.button25.Text = "报警履历";
+            this.button25.UseVisualStyleBackColor = true;
+            this.button25.Click += new System.EventHandler(this.button25_Click);
+            // 
+            // button24
+            // 
+            this.button24.Location = new System.Drawing.Point(619, 19);
+            this.button24.Name = "button24";
+            this.button24.Size = new System.Drawing.Size(106, 28);
+            this.button24.TabIndex = 37;
+            this.button24.Text = "写入信号选择";
+            this.button24.UseVisualStyleBackColor = true;
+            this.button24.Click += new System.EventHandler(this.button24_Click);
+            // 
+            // button23
+            // 
+            this.button23.Location = new System.Drawing.Point(490, 19);
+            this.button23.Name = "button23";
+            this.button23.Size = new System.Drawing.Size(106, 28);
+            this.button23.TabIndex = 36;
+            this.button23.Text = "读取信号选择";
+            this.button23.UseVisualStyleBackColor = true;
+            this.button23.Click += new System.EventHandler(this.button23_Click);
+            // 
+            // btn_StartOpHis
+            // 
+            this.btn_StartOpHis.Location = new System.Drawing.Point(362, 22);
+            this.btn_StartOpHis.Name = "btn_StartOpHis";
+            this.btn_StartOpHis.Size = new System.Drawing.Size(106, 28);
+            this.btn_StartOpHis.TabIndex = 35;
+            this.btn_StartOpHis.Text = "开始记录";
+            this.btn_StartOpHis.UseVisualStyleBackColor = true;
+            this.btn_StartOpHis.Click += new System.EventHandler(this.btn_StartOpHis_Click);
             // 
             // label19
             // 
@@ -312,7 +382,7 @@
             this.num_RdOpHisENo.Size = new System.Drawing.Size(84, 21);
             this.num_RdOpHisENo.TabIndex = 31;
             this.num_RdOpHisENo.Value = new decimal(new int[] {
-            10,
+            5,
             0,
             0,
             0});
@@ -910,7 +980,7 @@
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.num_MarcoNum);
             this.groupBox2.Controls.Add(this.button1);
-            this.groupBox2.Location = new System.Drawing.Point(20, 108);
+            this.groupBox2.Location = new System.Drawing.Point(20, 93);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(495, 160);
             this.groupBox2.TabIndex = 5;
@@ -1227,15 +1297,65 @@
             this.txt_Port.TabIndex = 12;
             this.txt_Port.Text = "8193";
             // 
-            // btn_StartOpHis
+            // button27
             // 
-            this.btn_StartOpHis.Location = new System.Drawing.Point(507, 21);
-            this.btn_StartOpHis.Name = "btn_StartOpHis";
-            this.btn_StartOpHis.Size = new System.Drawing.Size(106, 28);
-            this.btn_StartOpHis.TabIndex = 35;
-            this.btn_StartOpHis.Text = "开始记录";
-            this.btn_StartOpHis.UseVisualStyleBackColor = true;
-            this.btn_StartOpHis.Click += new System.EventHandler(this.btn_StartOpHis_Click);
+            this.button27.Location = new System.Drawing.Point(772, 71);
+            this.button27.Name = "button27";
+            this.button27.Size = new System.Drawing.Size(136, 28);
+            this.button27.TabIndex = 40;
+            this.button27.Text = "操作信息历史信息";
+            this.button27.UseVisualStyleBackColor = true;
+            this.button27.Click += new System.EventHandler(this.button27_Click);
+            // 
+            // button28
+            // 
+            this.button28.Location = new System.Drawing.Point(311, 71);
+            this.button28.Name = "button28";
+            this.button28.Size = new System.Drawing.Size(136, 28);
+            this.button28.TabIndex = 41;
+            this.button28.Text = "操作历史信息数量";
+            this.button28.UseVisualStyleBackColor = true;
+            this.button28.Click += new System.EventHandler(this.button28_Click);
+            // 
+            // button29
+            // 
+            this.button29.Location = new System.Drawing.Point(456, 71);
+            this.button29.Name = "button29";
+            this.button29.Size = new System.Drawing.Size(136, 28);
+            this.button29.TabIndex = 42;
+            this.button29.Text = "操作信息历史";
+            this.button29.UseVisualStyleBackColor = true;
+            this.button29.Click += new System.EventHandler(this.button29_Click);
+            // 
+            // button30
+            // 
+            this.button30.Location = new System.Drawing.Point(104, 71);
+            this.button30.Name = "button30";
+            this.button30.Size = new System.Drawing.Size(96, 28);
+            this.button30.TabIndex = 43;
+            this.button30.Text = "当前操作信息2";
+            this.button30.UseVisualStyleBackColor = true;
+            this.button30.Click += new System.EventHandler(this.button30_Click);
+            // 
+            // button31
+            // 
+            this.button31.Location = new System.Drawing.Point(206, 71);
+            this.button31.Name = "button31";
+            this.button31.Size = new System.Drawing.Size(96, 28);
+            this.button31.TabIndex = 44;
+            this.button31.Text = "当前操作信息3";
+            this.button31.UseVisualStyleBackColor = true;
+            this.button31.Click += new System.EventHandler(this.button31_Click);
+            // 
+            // button32
+            // 
+            this.button32.Location = new System.Drawing.Point(598, 71);
+            this.button32.Name = "button32";
+            this.button32.Size = new System.Drawing.Size(136, 28);
+            this.button32.TabIndex = 45;
+            this.button32.Text = "清空操作信息历史";
+            this.button32.UseVisualStyleBackColor = true;
+            this.button32.Click += new System.EventHandler(this.button32_Click);
             // 
             // Form1
             // 
@@ -1396,6 +1516,16 @@
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.NumericUpDown num_RdOpHisENo;
         private System.Windows.Forms.Button btn_StartOpHis;
+        private System.Windows.Forms.Button button23;
+        private System.Windows.Forms.Button button24;
+        private System.Windows.Forms.Button button25;
+        private System.Windows.Forms.Button button26;
+        private System.Windows.Forms.Button button27;
+        private System.Windows.Forms.Button button28;
+        private System.Windows.Forms.Button button29;
+        private System.Windows.Forms.Button button31;
+        private System.Windows.Forms.Button button30;
+        private System.Windows.Forms.Button button32;
     }
 }
 

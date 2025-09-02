@@ -1342,24 +1342,10 @@ namespace Cherish.IOCNC.Focas
 
         }
 
-        private void button23_Click(object sender, EventArgs e)
-        {
-         
-            Print($"cnc_stopophis success");
-        }
+     
         private void btn_StartOpHis_Click(object sender, EventArgs e)
         {
-            _ret = Focas1.cnc_startophis(_flibhndl);//在stop期间还记录吗？
-            if (_ret != 0)
-            {
-                Print($"cnc_startophis fail,ret:{_ret}");
-                return;
-            }
-            else
-            {
-                Print($"cnc_startophis success");
-
-            }
+          
         }
         /// <summary>
         /// 根据按键码获取按键名称
@@ -1520,6 +1506,277 @@ namespace Cherish.IOCNC.Focas
             }
         }
 
-    
+        private void button23_Click(object sender, EventArgs e)
+        {
+            IODBSIG3 iODBSIG = new IODBSIG3();
+            //读取操作历史的信号选择
+            _ret = Focas1.cnc_rdhissgnl3(_flibhndl, iODBSIG);
+            if (_ret == 0)
+            {
+                for (int i = 1; i <= 20; i++)
+                {
+                    _IODBSIG3_data data = (_IODBSIG3_data)iODBSIG.data.GetType().GetField($"data{i}").GetValue(iODBSIG.data);
+                    Print($"ent_no:{data.ent_no},sig_name:{GetSigName(data.sig_name)}{data.sig_no}:{Convert.ToString(data.mask_pat, 2).PadLeft(8, '0')}");
+                }
+            }
+            else
+            {
+                Print($"cnc_rdhissgnl error:{_ret}");
+            }
+        }
+
+        /// <summary>
+        /// 根据SigName的值获取地址
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public static string GetSigName(short name)
+        {
+            switch (name)
+            {
+                case 1:
+                    return "X";
+                case 2:
+                    return "G";
+                case 3:
+                    return "Y";
+                case 4:
+                    return "F";
+                default:
+                    break;
+            }
+            return "";
+        }
+
+        private void button24_Click(object sender, EventArgs e)
+        {
+            IODBSIG3 iODBSIG = new IODBSIG3();
+            //读取操作历史的信号选择
+            _ret = Focas1.cnc_rdhissgnl3(_flibhndl, iODBSIG);
+
+            iODBSIG.type = 4;//数量里面存在没有定义的信号点位，将报错
+
+            iODBSIG.data.data1.ent_no = 1;
+            iODBSIG.data.data1.sig_name = 4;
+            iODBSIG.data.data1.sig_no = 3;
+            iODBSIG.data.data1.mask_pat=0x07;
+
+            //如果这个信号还没有是写入不进去的
+            iODBSIG.data.data3.ent_no = 2;
+            iODBSIG.data.data3.sig_name = 2;
+            iODBSIG.data.data3.sig_no = 3;
+            iODBSIG.data.data3.mask_pat = 0x11;
+
+            iODBSIG.data.data4.ent_no = 4;
+            iODBSIG.data.data4.sig_name = 2;
+            iODBSIG.data.data4.sig_no = 10;
+            iODBSIG.data.data4.mask_pat = 0x07;
+
+            _ret = Focas1.cnc_wrhissgnl3(_flibhndl, iODBSIG);
+            if (_ret == 0)
+            {
+                Print($"cnc_wrhissgnl success");
+            }
+            else
+            {
+                Print($"cnc_wrhissgnl error:{_ret}");
+                ODBERR oDBERR = new ODBERR();
+                _ret = cnc_getdtailerr(_flibhndl, oDBERR);
+                if (_ret == 0)
+                {
+                    Print($"cnc_getdtailerr error:{oDBERR.err_dtno}");
+                }
+                else
+                {
+                    Print($"cnc_getdtailerr error:{_ret}");
+                }
+                Focas1.cnc_wrkeyhistry(_flibhndl, 0);//清除错误
+            }
+
+
+        }
+
+        private void button25_Click(object sender, EventArgs e)
+        {
+            _ret = Focas1.cnc_stopophis(_flibhndl);
+            if (_ret != 0)
+            {
+                Print($"cnc_stopophis error,_ret:{_ret}");
+                return;
+            }
+            ushort s_no = (ushort)this.num_RdOpHisSNo.Value;
+            ushort e_no = (ushort)this.num_RdOpHisENo.Value;
+            ushort length = (ushort)(e_no - s_no + 1);
+            length = (ushort)(4+516 * length);
+            _ret = Focas1.cnc_rdalmhisno(_flibhndl, out ushort hisno);
+            if (_ret != 0)
+            {
+                Print($"cnc_rdalmhisno error,_ret:{_ret}");
+                return;
+            }
+            Print($"hisno:{hisno}");
+            ODBAHIS5 dBAHIS =new ODBAHIS5();
+            _ret= Focas1.cnc_rdalmhistry5(_flibhndl, s_no,  e_no, length,  dBAHIS);
+            if(_ret == 0)
+            {
+                for (int i = 1; i <= 10; i++)
+                {
+                    ALM_HIS5_data data=(ALM_HIS5_data) dBAHIS.alm_his.GetType().GetField($"data{i}").GetValue(dBAHIS.alm_his);
+                    Print($"alm_grp:{data.alm_grp},alm_no:{data.alm_no},axis_no:{data.axis_no},date:{data.year}-{data.month}-{data.day} {data.hour}:{data.minute}:{data.second}");
+                    Print($"pth_no:{data.pth_no},dsp_flg:{data.dsp_flg},axis_num:{data.axis_num},alm_msg:{data.alm_msg}");
+                    if (data.mcn_pos[0] != 0)//根本就读取不出来这些信息
+                    {
+                        Print($"abs_pos:{data.mcn_pos[0]}");
+                    }
+
+
+                }
+
+
+            }
+            else
+            {
+                Print($"cnc_rdalmhistry error,_ret:{_ret}");
+            }
+            
+            _ret =Focas1.cnc_startophis(_flibhndl);
+            if (_ret != 0)
+            {
+                Print($"cnc_startophis error,_ret:{_ret}");
+                return;
+            }
+
+        }
+
+        private void button26_Click(object sender, EventArgs e)
+        {
+            short type = 0;
+            short length = 262;
+            OPMSG oPMSG = new OPMSG();
+            //对于F系列每次只能读取一条当前的操作信息
+            _ret = Focas1.cnc_rdopmsg(_flibhndl, type, length, oPMSG);
+            if (_ret == 0)
+            {
+                for (global::System.Int32 i = 1; i <= 5; i++)
+                {
+                    OPMSG_data data = (OPMSG_data)oPMSG.GetType().GetField($"msg{i}").GetValue(oPMSG);
+                    if (data.char_num > 0&&data.datano!=-1)
+                    {
+                        Print($"msg{i}:datano:{data.datano},type:{data.type},char_num:{data.char_num},data:{data.data}");
+                    }
+                }
+            }
+            else
+            {
+                Print($"cnc_rdopmsg2 error:{_ret}");
+            }
+        }
+        private void button30_Click(object sender, EventArgs e)
+        {
+            short type = -1;
+            short length =280;
+            OPMSG2 oPMSG2 = new OPMSG2();
+            //1只能读取4条操作信息的情况   系统就这么设定，但不满足我们实际情况
+            //2操作信息被清楚后仍然会被读取到 Bug
+            _ret = Focas1.cnc_rdopmsg2(_flibhndl, type, length, oPMSG2);
+            if (_ret == 0)
+            {
+                for (global::System.Int32 i = 1; i <= 5; i++)
+                {
+                    OPMSG2_data data = (OPMSG2_data)oPMSG2.GetType().GetField($"msg{i}").GetValue(oPMSG2);
+                    if (data.char_num > 0 && data.datano != -1)
+                    {
+                        Print($"msg{i}:datano:{data.datano},type:{data.type},char_num:{data.char_num},data:{data.data}");
+                    }
+                }
+            }
+            else
+            {
+                Print($"cnc_rdopmsg2 error:{_ret}");
+            }
+        }
+
+        private void button31_Click(object sender, EventArgs e)
+        {
+            short type = -1;//只能type=4的时候才可以读取出macro message -1也可以
+            short number = 17;
+            OPMSG3 oPMSG3 = new OPMSG3();
+            _ret = Focas1.cnc_rdopmsg3(_flibhndl, type, ref number, oPMSG3);
+            if (_ret == 0)
+            {
+                Print($"cnc_rdopmsg3 success");
+                for (global::System.Int32 i = 1; i <= number; i++)
+                {
+                    OPMSG3_data data = (OPMSG3_data)oPMSG3.GetType().GetField($"msg{i}").GetValue(oPMSG3);
+                    if (data.datano != -1)
+                    {
+                        Print($"msg{i}:datano:{data.datano},type:{data.type},char_num:{data.char_num},data:{data.data}");
+                    }
+                }
+            }
+            else
+            {
+                Print($"cnc_rdopmsg3 error:{_ret}");
+            }
+        }
+        private void button27_Click(object sender, EventArgs e)
+        {
+          
+        }
+
+        private void button28_Click(object sender, EventArgs e)
+        {
+            Focas1.cnc_stopomhis(_flibhndl);
+            ///外部操作信息的数量
+            _ret = Focas1.cnc_rdomhisno(_flibhndl, out ushort count);
+            if (_ret == 0)
+            {
+                Print($"count:{count}");
+            }
+            else
+            {
+                Print($"cnc_rdomhisinfo error:{_ret}");
+            }
+        }
+
+        private void button29_Click(object sender, EventArgs e)
+        {
+            Focas1.cnc_stopomhis(_flibhndl);
+
+            ODBOMHIS2 oDBOMHIS2 = new ODBOMHIS2();
+            ushort s_no = (ushort)this.num_RdOpHisSNo.Value;
+            ushort e_no = (ushort)this.num_RdOpHisENo.Value;
+            ushort length = (ushort)(4 + 272 * (e_no - s_no + 1));
+
+            _ret = Focas1.cnc_rdomhistry2(_flibhndl, s_no, e_no, length, oDBOMHIS2);
+            if (_ret == 0)
+            {
+                for (global::System.Int32 i = 1; i <= 10; i++)
+                {
+                    Print($"s_no:{oDBOMHIS2.s_no},e_no:{oDBOMHIS2.e_no}");
+                    ODBOMHIS2_data data = (ODBOMHIS2_data)oDBOMHIS2.opm_his.GetType().GetField($"data{i}").GetValue(oDBOMHIS2.opm_his);
+                    Print($"dsp_flag:{data.dsp_flg},{data.om_no}-{data.alm_msg},时间：{data.year}-{data.month}-{data.day} {data.hour}:{data.minute}:{data.second} ");
+                }
+            }
+            else
+            {
+                Print($"cnc_rdomhisinfo error:{_ret}");
+            }
+            Focas1.cnc_startomhis(_flibhndl);
+        }
+
+        private void button32_Click(object sender, EventArgs e)
+        {
+            //无效
+            _ret = Focas1.cnc_clearomhis(_flibhndl);
+            if (_ret == 0)
+            {
+                Print($"cnc_clearomhis success");
+            }
+            else
+            {
+                Print($"cnc_clearomhis error:{_ret}");
+            }
+        }
     }
 }

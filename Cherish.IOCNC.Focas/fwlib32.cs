@@ -3923,6 +3923,21 @@ public class Focas1
         public OPMSG3_data msg3 = new OPMSG3_data();
         public OPMSG3_data msg4 = new OPMSG3_data();
         public OPMSG3_data msg5 = new OPMSG3_data();
+
+        public OPMSG3_data msg6 = new OPMSG3_data();
+        public OPMSG3_data msg7 = new OPMSG3_data();
+        public OPMSG3_data msg8 = new OPMSG3_data();
+        public OPMSG3_data msg9 = new OPMSG3_data();
+        public OPMSG3_data msg10 = new OPMSG3_data();
+
+        public OPMSG3_data msg11 = new OPMSG3_data();
+        public OPMSG3_data msg12 = new OPMSG3_data();
+        public OPMSG3_data msg13 = new OPMSG3_data();
+        public OPMSG3_data msg14 = new OPMSG3_data();
+        public OPMSG3_data msg15 = new OPMSG3_data();
+
+        public OPMSG3_data msg16 = new OPMSG3_data();
+        public OPMSG3_data msg17 = new OPMSG3_data();
     }
 
     /* cnc_sysconfig:read CNC configuration information */
