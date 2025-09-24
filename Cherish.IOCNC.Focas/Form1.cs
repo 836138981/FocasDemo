@@ -7,6 +7,7 @@ using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
 using System.Runtime.InteropServices;
+using System.Runtime.InteropServices.ComTypes;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
@@ -27,6 +28,9 @@ namespace Cherish.IOCNC.Focas
             InitializeComponent();
 
             this.cmb_TimerType.SelectedIndex= 0;
+            this.tabControl1.SelectedIndex = 1;
+
+            this.cmb_ParmType.SelectedIndex = 4;
         }
 
         private void 说明ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -416,7 +420,13 @@ namespace Cherish.IOCNC.Focas
             if (index == -1) return 0;
             return (short)(valStr.Length - index - 1);
         }
-
+        private short GetDecimanlPlacesString(string value)
+        {
+            string valStr = value;
+            var index = valStr.IndexOf(".");
+            if (index == -1) return 0;
+            return (short)(valStr.Length - index - 1);
+        }
         private void btn_WriteToolGroup_Click(object sender, EventArgs e)
         {
             short length = 8 + 16 * 2;
@@ -1778,5 +1788,942 @@ namespace Cherish.IOCNC.Focas
                 Print($"cnc_clearomhis error:{_ret}");
             }
         }
+
+        private void button33_Click(object sender, EventArgs e)
+        {
+          var _ret=  Focas1.cnc_alarm2(_flibhndl,out int status);
+          if (_ret == 0)
+          {
+              Print($"cnc_alarm2 success");
+              Print($"status:{Convert.ToString(status, 2).PadLeft(32, '0').Insert(28, "_").Insert(24, "_").Insert(20, "_").Insert(16, "_").Insert(12, "_").Insert(8, "_").Insert(4, "_")}");
+            }
+          else
+          {
+              Print($"cnc_alarm2 error:{_ret}");
+          }
+        }
+
+        private void button34_Click(object sender, EventArgs e)
+        {
+            short type =0;//0:without message 1:with message
+            short alm_type = -1;//报警类型 -1 读取所有报警类型的报警信息
+            short length = 8 * 5+ 4;
+            ALMINFO_1 aLMINFO_1 = new ALMINFO_1();
+            _ret = Focas1.cnc_rdalminfo(_flibhndl, type, alm_type, length, aLMINFO_1);
+            if (_ret == 0)
+            {
+                Print($"cnc_rdalminfo success");
+                for (int i = 1; i <= 5; i++)
+                {
+                    //如果一次性读取所有类型的报警信息，返回值没有标记实际是哪种类型的报警信息
+                    ALMINFO1_data data = (ALMINFO1_data)aLMINFO_1.GetType().GetField($"msg{i}").GetValue(aLMINFO_1);
+                    if (data.alm_no > 0)
+                    {
+                        Print($"{i}:axis:{data.axis},alm_no:{data.alm_no}");
+                    }
+                }
+            }
+            else
+            {
+                Print($"cnc_rdalminfo error:{_ret}");
+            }
+        }
+
+        private void button35_Click(object sender, EventArgs e)
+        {
+            short type =1;//0:without message 1:with message
+            short alm_type = -1;//报警类型
+            short length = 40 * 5 + 4;
+            ALMINFO_2 aLMINFO_2 = new ALMINFO_2();
+            _ret = Focas1.cnc_rdalminfo(_flibhndl, type, alm_type, length, aLMINFO_2);
+            if (_ret == 0)
+            {
+                Print($"cnc_rdalminfo success");
+                for (int i = 1; i <= 5; i++)
+                {
+                    ALMINFO2_data data = (ALMINFO2_data)aLMINFO_2.GetType().GetField($"msg{i}").GetValue(aLMINFO_2);
+                    if (data.alm_no > 0)
+                    {
+                        Print($"{i}:axis:{data.axis},alm_no:{data.alm_no},msg_len:{data.msg_len},alm_msg:{data.alm_msg}");
+                    }
+                }
+            }
+            else
+            {
+                Print($"cnc_rdalminfo error:{_ret}");
+            }
+        }
+
+        private void button36_Click(object sender, EventArgs e)
+        {
+            short type = -1;
+            short num = 10;
+            ODBALMMSG2 oDBALMMSG2 = new ODBALMMSG2();
+            _ret = Focas1.cnc_rdalmmsg2(_flibhndl, type, ref num, oDBALMMSG2);
+            if (_ret == 0)
+            {
+                Print($"cnc_rdalmmsg2 success");
+                for (int i = 1; i <= num; i++)
+                {
+                    ODBALMMSG2_data data = (ODBALMMSG2_data)oDBALMMSG2.GetType().GetField($"msg{i}").GetValue(oDBALMMSG2);
+                    if (data.alm_no > 0)
+                    {
+                        string alm_msg = System.Text.Encoding.GetEncoding("gb2312").GetString(data.alm_msg.Take(data.msg_len).ToArray());
+                        Print($"{i}:alm_no:{data.alm_no},type:{data.type},axis:{data.axis},msg_len:{data.msg_len},alm_msg:{alm_msg}");
+                    }
+                }
+            }
+            else
+            {
+                Print($"cnc_rdalmmsg2 error:{_ret}");
+            }
+        }
+
+        private void button37_Click(object sender, EventArgs e)
+        {
+            //相当于在操作面板上按下了ALARM RESET键
+            _ret = Focas1.cnc_clralm(_flibhndl, 0);
+            if (_ret == 0)
+            {
+                Print($"cnc_clralm success");
+            }
+            else
+            {
+                Print($"cnc_clralm error:{_ret}");
+            }
+        }
+
+        private void button38_Click(object sender, EventArgs e)
+        {
+            Focas1.cnc_stopophis(_flibhndl);
+            _ret =Focas1.cnc_rdalmhisno(_flibhndl, out ushort hisno);
+            if (_ret == 0)
+            {
+                Print($"cnc_rdalmhisno success:hisno:{hisno}");
+            }
+            else
+            {
+                Print($"cnc_rdalmhisno error:{_ret}");
+            }
+            Focas1.cnc_startophis(_flibhndl);
+        }
+
+        private void button39_Click(object sender, EventArgs e)
+        {
+            Focas1.cnc_stopophis(_flibhndl);
+            ushort s_no= (ushort)this.num_RdOpHisSNo.Value;
+            ushort e_no= (ushort)this.num_RdOpHisENo.Value;
+            ushort length = (ushort)(4 + 516 * (e_no - s_no + 1));
+            ODBAHIS5 oDBAHIS5 = new ODBAHIS5();
+            _ret = Focas1.cnc_rdalmhistry5(_flibhndl, s_no, e_no, length, oDBAHIS5);
+            if (_ret == 0)
+            {
+                Print($"s_no:{oDBAHIS5.s_no},e_no:{oDBAHIS5.e_no}");
+                for (global::System.Int32 i = 1; i <= 10; i++)
+                {
+                    ALM_HIS5_data data = (ALM_HIS5_data)oDBAHIS5.alm_his.GetType().GetField($"data{i}").GetValue(oDBAHIS5.alm_his);
+                    Print($"alm_grp:{data.alm_grp},alm_no:{data.alm_no},axis_no:{data.axis_no},alm_msg:{data.alm_msg},时间：{data.year}-{data.month}-{data.day} {data.hour}:{data.minute}:{data.second} ");
+                    Print($"{data.abs_pos[0]}");
+                }
+            }
+            else
+            {
+                Print($"cnc_rdalmhisno error:{_ret}");
+            }
+            Focas1.cnc_startophis(_flibhndl);
+        }
+
+
+        private void btn_rdParmNum_Click(object sender, EventArgs e)
+        {
+            ODBPARANUM oDBPARANUM = new ODBPARANUM();
+            _ret = Focas1.cnc_rdparanum(_flibhndl, oDBPARANUM);
+            if(_ret == 0)
+            {
+                Print($"para_min:{oDBPARANUM.para_min},para_max:{oDBPARANUM.para_max},total_no:{oDBPARANUM.total_no}");
+            }
+            else
+            {
+                Print($"cnc_rdparanum error:{_ret}");
+            }
+        }
+
+        private void button27_Click_1(object sender, EventArgs e)
+        {
+            short s_number = (short)this.num_ParamNum.Value;
+            ushort read_no = 1;//读取的参数数量
+            Focas1.ODBPARAIF oDBPARAIF = new Focas1.ODBPARAIF();
+            _ret = Focas1.cnc_rdparainfo(_flibhndl, s_number, read_no, oDBPARAIF);
+            if (_ret == Focas1.EW_OK)
+            {
+                //数据类型
+                int dataType = oDBPARAIF.info.info1.prm_type & 0b11;//取最低两位的值
+                int withAxis = oDBPARAIF.info.info1.prm_type >> 2 & 1;//取第三位的值
+                bool isReal = (oDBPARAIF.info.info1.prm_type >> 12 & 1)==1;//获取第12位，是否是real类型
+                string dataTypeString = string.Empty;
+
+                switch (dataType)
+                {
+                    case 0:
+                        dataTypeString = "bit";
+                        break;
+                    case 1:
+                        dataTypeString = "byte";
+                        break;
+                    case 2:
+                        dataTypeString = "word";
+                        break;
+                    case 3:
+                        if (!isReal)
+                        {
+                            dataTypeString = "2-word";
+                        }
+                        else
+                        {
+                            dataTypeString = "real";
+                        }
+                        break;
+
+                    default:
+                        break;
+                }
+                Print($"{s_number},Data Type:{dataTypeString} type,WithAxis:{withAxis==1}");
+
+            }
+            else
+            {
+                Print($"cnc_rdparanum error:{_ret}");
+            }
+        }
+        /// <summary>
+        /// 获取参数信息
+        /// </summary>
+        /// <param name="dataType"></param>
+        /// <param name="withAxis"></param>
+        /// <param name="isReal"></param>
+        private void GetParmInfo(out int dataType,out bool withAxis,out bool isReal)
+        {
+            short s_number = (short)this.num_ParamNum.Value;
+            ushort read_no = 1;//读取的参数数量
+
+
+            Focas1.ODBPARAIF oDBPARAIF = new Focas1.ODBPARAIF();
+            _ret = Focas1.cnc_rdparainfo(_flibhndl, s_number, read_no, oDBPARAIF);
+            if (_ret != Focas1.EW_OK)
+            {
+                Print($"cnc_rdparanum error:{_ret}");
+            }
+            //数据类型
+            dataType = oDBPARAIF.info.info1.prm_type & 0b11;//取最低两位的值
+            withAxis = (oDBPARAIF.info.info1.prm_type >> 2 & 1) == 1;//取第三位的值  是否有轴
+            isReal = (oDBPARAIF.info.info1.prm_type >> 12 & 1) == 1;//获取第12位，是否是real类型
+            string dataTypeString = string.Empty;
+
+            switch (dataType)
+            {
+                case 0:
+                    dataTypeString = "bit";
+                    break;
+                case 1:
+                    dataTypeString = "byte";
+                    break;
+                case 2:
+                    dataTypeString = "word";
+                    break;
+                case 3:
+                    if (!isReal)
+                    {
+                        dataTypeString = "2-word";
+                    }
+                    else
+                    {
+                        dataTypeString = "real";
+                    }
+                    break;
+
+                default:
+                    break;
+            }
+            Print($"{s_number},Data Type:{dataTypeString} type,WithAxis:{withAxis}");
+        }
+
+        private void button40_Click(object sender, EventArgs e)
+        {
+            short s_number = (short)this.num_ParamNum.Value;
+            short length = 4 + 4 * 1;
+            short axisNo = 0;
+            GetParmInfo(out int dataType, out bool withAxis, out bool isReal);
+
+            //bit
+            if (dataType == 0)
+            {
+                if (withAxis)
+                {
+                    axisNo = ALL_AXES;
+                    length = 4 + 1 * MAX_AXIS;//所有轴没法一次性读取  length就是个坑 如何确定MAX_AXIS
+                    Focas1.IODBPSD_3 iODBPSD = new Focas1.IODBPSD_3();
+                    _ret = Focas1.cnc_rdparam(_flibhndl, s_number, axisNo, length, iODBPSD);
+                    if (_ret == Focas1.EW_OK)
+                    {
+                        Print($"datano:{iODBPSD.datano},type:{iODBPSD.type}");
+                        foreach (var cdata in iODBPSD.cdatas)
+                        {
+                            string tempData = Convert.ToString(cdata, 2).PadLeft(8, '0').Insert(4, "_");
+                            Print($"data:{tempData}");
+                        }
+                    }
+                    else
+                    {
+                        Print($"cnc_rdparam error:{_ret}");
+                    }
+                }
+                else
+                {
+                    length = 4 + 1;
+                    Focas1.IODBPSD_1 iODBPSD_1 = new Focas1.IODBPSD_1();
+                    _ret = Focas1.cnc_rdparam(_flibhndl, s_number, axisNo, length, iODBPSD_1);
+                    if (_ret == Focas1.EW_OK)
+                    {
+                        string tempData = Convert.ToString(iODBPSD_1.cdata, 2).PadLeft(8, '0').Insert(4, "_");
+                        Print($"datano:{iODBPSD_1.datano},type:{iODBPSD_1.type},data:{tempData}");
+                    }
+                    else
+                    {
+                        Print($"cnc_rdparam error:{_ret}");
+                    }
+                }
+
+            }
+            else if (dataType == 1)
+            {//byte
+                if (withAxis)
+                {
+                    axisNo = ALL_AXES;
+                    length = 4 + 1 * MAX_AXIS;
+                    Focas1.IODBPSD_3 iODBPSD = new Focas1.IODBPSD_3();
+                    _ret = Focas1.cnc_rdparam(_flibhndl, s_number, axisNo, length, iODBPSD);
+                    if (_ret == Focas1.EW_OK)
+                    {
+                        Print($"datano:{iODBPSD.datano},type:{iODBPSD.type}");
+                        foreach (var cdata in iODBPSD.cdatas)
+                        {
+                            Print($"data:{cdata}");
+                        }
+                    }
+                    else
+                    {
+                        Print($"cnc_rdparam error:{_ret}");
+                    }
+                }
+                else
+                {
+                    length = 4 + 1;
+                    Focas1.IODBPSD_1 iODBPSD_1 = new Focas1.IODBPSD_1();
+                    _ret = Focas1.cnc_rdparam(_flibhndl, s_number, axisNo, length, iODBPSD_1);
+                    if (_ret == Focas1.EW_OK)
+                    {
+                        Print($"datano:{iODBPSD_1.datano},type:{iODBPSD_1.type},data:{iODBPSD_1.cdata}");
+                    }
+                    else
+                    {
+                        Print($"cnc_rdparam error:{_ret}");
+                    }
+                }
+            }
+            else if (dataType == 2)
+            {//word
+                if (withAxis)
+                {
+                    axisNo = ALL_AXES;
+                    length = 4 + 2 * MAX_AXIS;
+                    Focas1.IODBPSD_3 iODBPSD = new Focas1.IODBPSD_3();
+                    _ret = Focas1.cnc_rdparam(_flibhndl, s_number, axisNo, length, iODBPSD);
+                    if (_ret == Focas1.EW_OK)
+                    {
+                        Print($"datano:{iODBPSD.datano},type:{iODBPSD.type}");
+                        foreach (var idata in iODBPSD.idatas)
+                        {
+                            Print($"data:{idata}");
+                        }
+                    }
+                    else
+                    {
+                        Print($"cnc_rdparam error:{_ret}");
+                    }
+                }
+                else
+                {
+                    length = 4 + 2;
+                    Focas1.IODBPSD_1 iODBPSD_1 = new Focas1.IODBPSD_1();
+                    _ret = Focas1.cnc_rdparam(_flibhndl, s_number, axisNo, length, iODBPSD_1);
+                    if (_ret == Focas1.EW_OK)
+                    {
+                        Print($"datano:{iODBPSD_1.datano},type:{iODBPSD_1.type},data:{iODBPSD_1.idata}");
+                    }
+                    else
+                    {
+                        Print($"cnc_rdparam error:{_ret}");
+                    }
+                }
+            }
+            else if (dataType == 3&&!isReal)
+            {//2-word
+                if (withAxis)
+                {
+                    axisNo = ALL_AXES;
+                    length = 4 + 4 *MAX_AXIS;
+                    Focas1.IODBPSD_3 iODBPSD = new Focas1.IODBPSD_3();
+                    _ret = Focas1.cnc_rdparam(_flibhndl, s_number, axisNo, length, iODBPSD);
+                    if (_ret == Focas1.EW_OK)
+                    {
+                        Print($"datano:{iODBPSD.datano},type:{iODBPSD.type}");
+                        foreach (var ldata in iODBPSD.ldatas)
+                        {
+                            Print($"data:{ldata}");
+                        }
+                    }
+                    else
+                    {
+                        Print($"cnc_rdparam error:{_ret}");
+                    }
+                    Thread.Sleep(10);
+                }
+                else
+                {
+                    length = 4 + 4;
+                    Focas1.IODBPSD_1 iODBPSD_1 = new Focas1.IODBPSD_1();
+                    _ret = Focas1.cnc_rdparam(_flibhndl, s_number, axisNo, length, iODBPSD_1);
+                    if (_ret == Focas1.EW_OK)
+                    {
+                        Print($"datano:{iODBPSD_1.datano},type:{iODBPSD_1.type},data:{iODBPSD_1.ldata}");
+                    }
+                    else
+                    {
+                        Print($"cnc_rdparam error:{_ret}");
+                    }
+                }
+            }
+            else if (dataType == 3 && isReal)
+            {//real
+                if (withAxis)
+                {
+                    axisNo = ALL_AXES;
+                    length = 4 + 8 * MAX_AXIS;
+                    Focas1.IODBPSD_4 iODBPSD = new Focas1.IODBPSD_4();
+                    _ret = Focas1.cnc_rdparam(_flibhndl, s_number, axisNo, length, iODBPSD);
+                    if (_ret == Focas1.EW_OK)
+                    {
+                        Print($"datano:{iODBPSD.datano},type:{iODBPSD.type}");
+                        for (int i = 1; i <= 32; i++)
+                        {
+                            var  data=(REALPRM)iODBPSD.rdatas.GetType().GetField($"rdata{i}").GetValue(iODBPSD.rdatas);
+                            Print($"{i}:{data.prm_val*Math.Pow(10,-data.dec_val)}");
+                        }
+                    }
+                    else
+                    {
+                        Print($"cnc_rdparam error:{_ret}");
+                    }
+                    Thread.Sleep(10);
+                }
+                else
+                {
+                    length = 4 + 8;
+                    Focas1.IODBPSD_2 iODBPSD = new Focas1.IODBPSD_2();
+                    _ret = Focas1.cnc_rdparam(_flibhndl, s_number, axisNo, length, iODBPSD);
+                    if (_ret == Focas1.EW_OK)
+                    {
+                        Print($"datano:{iODBPSD.datano},type:{iODBPSD.type},data:{iODBPSD.rdata.prm_val*Math.Pow(10,-iODBPSD.rdata.dec_val)}");
+                    }
+                    else
+                    {
+                        Print($"cnc_rdparam error:{_ret}");
+                    }
+                }
+            }
+
+        }
+
+        private void button41_Click(object sender, EventArgs e)
+        {
+            short s_number = (short)this.num_ParamNum.Value;
+            short length = 4 + 4 * 1;
+            short axisNo = 0;
+            GetParmInfo(out int dataType, out bool withAxis, out bool isReal);
+
+            short absolute = 0;//0：Relative  1:Absolute 
+            //bit
+            if (dataType == 0)
+            {
+                if (withAxis)
+                {
+                    axisNo = ALL_AXES;
+                    length = 4 + 1 * 32;//所有轴没法一次性读取  length就是个坑 如何确定MAX_AXIS
+                    Focas1.IODBPSD_3 iODBPSD = new Focas1.IODBPSD_3();
+                    _ret = Focas1.cnc_rdparam3(_flibhndl, s_number, axisNo, length, absolute, iODBPSD);
+                    if (_ret == Focas1.EW_OK)
+                    {
+                        Print($"datano:{iODBPSD.datano},type:{iODBPSD.type}");
+                        foreach (var cdata in iODBPSD.cdatas)
+                        {
+                            string tempData = Convert.ToString(cdata, 2).PadLeft(8, '0').Insert(4, "_");
+                            Print($"data:{tempData}");
+                        }
+                    }
+                    else
+                    {
+                        Print($"cnc_rdparam error:{_ret}");
+                    }
+
+                }
+                else
+                {
+                    length = 4 + 1;
+                    Focas1.IODBPSD_1 iODBPSD_1 = new Focas1.IODBPSD_1();
+                    _ret = Focas1.cnc_rdparam3(_flibhndl, s_number, axisNo, length, absolute, iODBPSD_1);
+                    if (_ret == Focas1.EW_OK)
+                    {
+                        string tempData = Convert.ToString(iODBPSD_1.cdata, 2).PadLeft(8, '0').Insert(4, "_");
+                        Print($"datano:{iODBPSD_1.datano},type:{iODBPSD_1.type},data:{tempData}");
+                    }
+                    else
+                    {
+                        Print($"cnc_rdparam error:{_ret}");
+                    }
+                }
+
+            }
+            else if (dataType == 1)
+            {//byte
+                if (withAxis)
+                {
+                    axisNo = ALL_AXES;
+                    length = 4 + 1 * MAX_AXIS;
+                    Focas1.IODBPSD_3 iODBPSD = new Focas1.IODBPSD_3();
+                    _ret = Focas1.cnc_rdparam3(_flibhndl, s_number, axisNo, length, absolute, iODBPSD);
+                    if (_ret == Focas1.EW_OK)
+                    {
+                        Print($"datano:{iODBPSD.datano},type:{iODBPSD.type}");
+                        foreach (var cdata in iODBPSD.cdatas)
+                        {
+                            Print($"data:{cdata}");
+                        }
+                    }
+                    else
+                    {
+                        Print($"cnc_rdparam error:{_ret}");
+                    }
+                }
+                else
+                {
+                    length = 4 + 1;
+                    Focas1.IODBPSD_1 iODBPSD_1 = new Focas1.IODBPSD_1();
+                    _ret = Focas1.cnc_rdparam3(_flibhndl, s_number, axisNo, length, absolute, iODBPSD_1);
+                    if (_ret == Focas1.EW_OK)
+                    {
+                        Print($"datano:{iODBPSD_1.datano},type:{iODBPSD_1.type},data:{iODBPSD_1.cdata}");
+                    }
+                    else
+                    {
+                        Print($"cnc_rdparam error:{_ret}");
+                    }
+                }
+            }
+            else if (dataType == 2)
+            {//word
+                if (withAxis)
+                {
+                    axisNo = ALL_AXES;
+                    length = 4 + 2 * MAX_AXIS;
+                    Focas1.IODBPSD_3 iODBPSD = new Focas1.IODBPSD_3();
+                    _ret = Focas1.cnc_rdparam3(_flibhndl, s_number, axisNo, length, absolute, iODBPSD);
+                    if (_ret == Focas1.EW_OK)
+                    {
+                        Print($"datano:{iODBPSD.datano},type:{iODBPSD.type}");
+                        foreach (var idata in iODBPSD.idatas)
+                        {
+                            Print($"data:{idata}");
+                        }
+                    }
+                    else
+                    {
+                        Print($"cnc_rdparam error:{_ret}");
+                    }
+                }
+                else
+                {
+                    length = 4 + 2;
+                    Focas1.IODBPSD_1 iODBPSD_1 = new Focas1.IODBPSD_1();
+                    _ret = Focas1.cnc_rdparam3(_flibhndl, s_number, axisNo, length, absolute, iODBPSD_1);
+                    if (_ret == Focas1.EW_OK)
+                    {
+                        Print($"datano:{iODBPSD_1.datano},type:{iODBPSD_1.type},data:{iODBPSD_1.idata}");
+                    }
+                    else
+                    {
+                        Print($"cnc_rdparam error:{_ret}");
+                    }
+                }
+            }
+            else if (dataType == 3 && !isReal)
+            {//2-word
+                if (withAxis)
+                {
+                    axisNo = ALL_AXES;
+                    length = 4 + 4 * MAX_AXIS;
+                    Focas1.IODBPSD_3 iODBPSD = new Focas1.IODBPSD_3();
+                    _ret = Focas1.cnc_rdparam3(_flibhndl, s_number, axisNo, length, absolute, iODBPSD);
+                    if (_ret == Focas1.EW_OK)
+                    {
+                        Print($"datano:{iODBPSD.datano},type:{iODBPSD.type}");
+                        foreach (var ldata in iODBPSD.ldatas)
+                        {
+                            Print($"data:{ldata}");
+                        }
+                    }
+                    else
+                    {
+                        Print($"cnc_rdparam error:{_ret}");
+                    }
+                    Thread.Sleep(10);
+                }
+                else
+                {
+                    length = 4 + 4;
+                    Focas1.IODBPSD_1 iODBPSD_1 = new Focas1.IODBPSD_1();
+                    _ret = Focas1.cnc_rdparam3(_flibhndl, s_number, axisNo, length, absolute, iODBPSD_1);
+                    if (_ret == Focas1.EW_OK)
+                    {
+                        Print($"datano:{iODBPSD_1.datano},type:{iODBPSD_1.type},data:{iODBPSD_1.ldata}");
+                    }
+                    else
+                    {
+                        Print($"cnc_rdparam error:{_ret}");
+                    }
+                }
+            }
+            else if (dataType == 3 && isReal)
+            {//real
+                if (withAxis)
+                {
+                    axisNo = ALL_AXES;
+                    length = 4 + 8 * MAX_AXIS;
+                    Focas1.IODBPSD_4 iODBPSD = new Focas1.IODBPSD_4();
+                    _ret = Focas1.cnc_rdparam3(_flibhndl, s_number, axisNo, length, absolute, iODBPSD);
+                    if (_ret == Focas1.EW_OK)
+                    {
+                        Print($"datano:{iODBPSD.datano},type:{iODBPSD.type}");
+                        for (int i = 1; i <= 32; i++)
+                        {
+                            var data = (REALPRM)iODBPSD.rdatas.GetType().GetField($"rdata{i}").GetValue(iODBPSD.rdatas);
+                            Print($"{i}:{data.prm_val * Math.Pow(10, -data.dec_val)}");
+                        }
+                    }
+                    else
+                    {
+                        Print($"cnc_rdparam error:{_ret}");
+                    }
+                    Thread.Sleep(10);
+                }
+                else
+                {
+                    length = 4 + 8;
+                    Focas1.IODBPSD_2 iODBPSD = new Focas1.IODBPSD_2();
+                    _ret = Focas1.cnc_rdparam3(_flibhndl, s_number, axisNo, length, absolute, iODBPSD);
+                    if (_ret == Focas1.EW_OK)
+                    {
+                        Print($"datano:{iODBPSD.datano},type:{iODBPSD.type},data:{iODBPSD.rdata.prm_val * Math.Pow(10, -iODBPSD.rdata.dec_val)}");
+                    }
+                    else
+                    {
+                        Print($"cnc_rdparam error:{_ret}");
+                    }
+                }
+            }
+        }
+
+        private void button42_Click(object sender, EventArgs e)
+        {
+            IODBPRMNO iODBPRMNO = new IODBPRMNO();
+            iODBPRMNO.prm[0]= 6700;
+            iODBPRMNO.prm[1] = 6861;
+            iODBPRMNO.prm[2] = 103;
+            iODBPRMNO.prm[3] = 1020;
+            iODBPRMNO.prm[4] = 930;
+            iODBPRMNO.prm[5] = 1624;
+            iODBPRMNO.prm[6] = 6710;
+            iODBPRMNO.prm[7] = 1828;
+            iODBPRMNO.prm[8] = 27261;
+            iODBPRMNO.prm[9] = 1221;
+
+            short num = 10;
+            IODBPRM iODBPRM = new IODBPRM();
+            _ret=Focas1.cnc_rdparam_ext(_flibhndl, iODBPRMNO, num, iODBPRM);
+            if (_ret == Focas1.EW_OK)
+            {
+                for (int i = 1; i <= 10; i++)
+                {
+                   var parm= (IODBPRM2)iODBPRM.GetType().GetField($"prm{i}").GetValue(iODBPRM);
+                   if ( parm.type==-1) continue;
+                    Print($"datano:{parm.datano},type:{parm.type},axis:{parm.axis},info:{parm.info},unit:{parm.unit}");
+                    int length=parm.axis==0?1:32;//如果没有轴就映射一个值  这边实际应该根据实际的轴的数量循环 
+
+                    for (int j = 1; j <= length; j++)
+                    {
+                        var data=  (IODBPRM_data)parm.data.GetType().GetField($"data{j}").GetValue(parm.data);
+                        if (parm.type == 0)
+                        {//bit
+                            Print($"{Convert.ToString(data.prm_val, 2).PadLeft(8, '0')}");
+                        }
+                        else if( parm.type == 4)
+                        {//real
+                            Print($"{data.prm_val * Math.Pow(10, -data.dec_val)}");
+                        }
+                        else
+                        {//byte word 2-word
+                            Print($"{data.prm_val}");
+                        }
+                    }
+                }
+            }
+            else
+            {
+                Print($"cnc_rdparam error:{_ret}");
+            }
+        }
+
+        private void button43_Click(object sender, EventArgs e)
+        {
+            short s_number = 930;
+            short e_number = 930;
+            short axis = 0;
+            short length = 4+2*1+2;//
+            IODBPSD_A iODBPSD_A = new IODBPSD_A();
+            _ret = Focas1.cnc_rdparar(_flibhndl, ref s_number, ref e_number, axis, ref length, iODBPSD_A);
+            if (_ret == Focas1.EW_OK)
+            {
+
+            }
+            else
+            {
+                Print($"cnc_rdparar error:{_ret}");
+
+            }
+        }
+
+        private void button44_Click(object sender, EventArgs e)
+        {
+            int parmType=this.cmb_ParmType.SelectedIndex;
+            bool isWithAxis=this.chb_WithAxis.Checked;
+            string parmVal=this.txt_ParmValue.Text.Trim();
+            List<string> listVal= parmVal.Split(new char[] { ',' }).ToList();
+            short length =0;
+            if (parmType == 0)
+            {//bit
+                if (isWithAxis)
+                {
+                    length = 4 + 1*MAX_AXIS;//多个轴一起写入单写一个轴
+                    IODBPSD_3 iODBPSD = new IODBPSD_3();
+                    iODBPSD.datano = (short)this.num_ParamNum.Value;
+                    iODBPSD.type = ALL_AXES;
+                    for (int i = 0; i < listVal.Count; i++)
+                    {
+                        iODBPSD.cdatas[i] = Convert.ToByte(listVal[i]);
+                    }
+                    _ret = Focas1.cnc_wrparam(_flibhndl, length, iODBPSD);
+                    if (_ret == Focas1.EW_OK)
+                    {
+                        Print($"cnc_wrparam success");
+                    }
+                    else
+                    {
+                        Print($"cnc_wrparam error:{_ret}");
+                    }
+                }
+                else
+                {
+                    length = 4 + 1;
+                    IODBPSD_1 iODBPSD_1 = new IODBPSD_1();
+                    iODBPSD_1.datano = (short)this.num_ParamNum.Value;
+                    iODBPSD_1.cdata =Convert.ToByte(parmVal);
+                    _ret = Focas1.cnc_wrparam(_flibhndl, length, iODBPSD_1);
+                    if (_ret == Focas1.EW_OK)
+                    {
+                        Print($"cnc_wrparam success");
+                    }
+                    else
+                    {
+                        Print($"cnc_wrparam error:{_ret}");
+                    }
+                }
+             
+            }
+            else if(parmType == 1)
+            {//byte 
+                if (isWithAxis)
+                {
+                    length = 4 + 1 * MAX_AXIS;
+                    IODBPSD_3 iODBPSD = new IODBPSD_3();
+                    iODBPSD.datano = (short)this.num_ParamNum.Value;
+                    iODBPSD.type = ALL_AXES;
+                    for (int i = 0; i < listVal.Count; i++)
+                    {
+                        iODBPSD.cdatas[i] = Convert.ToByte(listVal[i]);
+                    }
+                    _ret = Focas1.cnc_wrparam(_flibhndl, length, iODBPSD);
+                    if (_ret == Focas1.EW_OK)
+                    {
+                        Print($"cnc_wrparam success");
+                    }
+                    else
+                    {
+                        Print($"cnc_wrparam error:{_ret}");
+                    }
+                }
+                else
+                {
+                    length = 4 + 1;
+                    IODBPSD_1 iODBPSD_1 = new IODBPSD_1();
+                    iODBPSD_1.datano = (short)this.num_ParamNum.Value;
+                    iODBPSD_1.cdata = Convert.ToByte(parmVal);
+                    _ret = Focas1.cnc_wrparam(_flibhndl, length, iODBPSD_1);
+                    if (_ret == Focas1.EW_OK)
+                    {
+                        Print($"cnc_wrparam success");
+                    }
+                    else
+                    {
+                        Print($"cnc_wrparam error:{_ret}");
+                    }
+                }
+            }
+            else if (parmType == 2)
+            {//word 
+                if (isWithAxis)
+                {
+                    length = 4 + 2 * MAX_AXIS;
+                    IODBPSD_3 iODBPSD = new IODBPSD_3();
+                    iODBPSD.datano = (short)this.num_ParamNum.Value;
+                    iODBPSD.type = ALL_AXES;
+                    for (int i = 0; i < listVal.Count; i++)
+                    {
+                        iODBPSD.idatas[i] = Convert.ToInt16(listVal[i]);
+                    }
+                    _ret = Focas1.cnc_wrparam(_flibhndl, length, iODBPSD);
+                    if (_ret == Focas1.EW_OK)
+                    {
+                        Print($"cnc_wrparam success");
+                    }
+                    else
+                    {
+                        Print($"cnc_wrparam error:{_ret}");
+                    }
+                }
+                else
+                {
+                    length = 4 + 2;
+                    IODBPSD_1 iODBPSD_1 = new IODBPSD_1();
+                    iODBPSD_1.datano = (short)this.num_ParamNum.Value;
+                    iODBPSD_1.idata = Convert.ToInt16(parmVal);
+                    _ret = Focas1.cnc_wrparam(_flibhndl, length, iODBPSD_1);
+                    if (_ret == Focas1.EW_OK)
+                    {
+                        Print($"cnc_wrparam success");
+                    }
+                    else
+                    {
+                        Print($"cnc_wrparam error:{_ret}");
+                    }
+                }
+            }
+            else if (parmType == 3)
+            {//2 word 
+                if (isWithAxis)
+                {
+                    length = 4 + 4 * MAX_AXIS;
+                    IODBPSD_3 iODBPSD = new IODBPSD_3();
+                    iODBPSD.datano = (short)this.num_ParamNum.Value;
+                    iODBPSD.type = ALL_AXES;
+                    for (int i = 0; i < listVal.Count; i++)
+                    {
+                        iODBPSD.ldatas[i] = Convert.ToInt32(listVal[i]);
+                    }
+                    _ret = Focas1.cnc_wrparam(_flibhndl, length, iODBPSD);
+                    if (_ret == Focas1.EW_OK)
+                    {
+                        Print($"cnc_wrparam success");
+                    }
+                    else
+                    {
+                        Print($"cnc_wrparam error:{_ret}");
+                    }
+                }
+                else
+                {
+                    length = 4 + 4;
+                    IODBPSD_1 iODBPSD_1 = new IODBPSD_1();
+                    iODBPSD_1.datano = (short)this.num_ParamNum.Value;
+                    iODBPSD_1.ldata = Convert.ToInt32(parmVal);
+                    _ret = Focas1.cnc_wrparam(_flibhndl, length, iODBPSD_1);
+                    if (_ret == Focas1.EW_OK)
+                    {
+                        Print($"cnc_wrparam success");
+                    }
+                    else
+                    {
+                        Print($"cnc_wrparam error:{_ret}");
+                    }
+                }
+            }
+            else if (parmType == 4)
+            {//real 
+                if (isWithAxis)
+                {
+                    length = 4 + 8 * MAX_AXIS;//单个轴和多个轴
+                    IODBPSD_4 iODBPSD = new IODBPSD_4();
+                    iODBPSD.datano = (short)this.num_ParamNum.Value;
+                    iODBPSD.type = ALL_AXES;
+                    for (int i = 0; i < listVal.Count; i++)
+                    {
+                        iODBPSD.rdatas.GetType().GetField($"rdata{i+1}")//i需要加1
+                            .SetValue(iODBPSD.rdatas, new REALPRM()
+                            {
+                                dec_val = GetDecimanlPlacesString(listVal[i]),
+                                prm_val = (short)(Convert.ToDecimal((listVal[i])) * (decimal)Math.Pow(10, GetDecimanlPlacesString(listVal[i])))
+                            });
+                    }
+                    _ret = Focas1.cnc_wrparam(_flibhndl, length, iODBPSD);
+                    if (_ret == Focas1.EW_OK)
+                    {
+                        Print($"cnc_wrparam success");
+                    }
+                    else
+                    {
+                        Print($"cnc_wrparam error:{_ret}");
+                    }
+                }
+                else
+                {
+                    length = 4 + 8;
+                    IODBPSD_2 iODBPSD = new IODBPSD_2();
+                    iODBPSD.datano = (short)this.num_ParamNum.Value;
+                    iODBPSD.rdata.dec_val = GetDecimanlPlacesString(parmVal);
+                    iODBPSD.rdata.prm_val = (short)((Convert.ToDouble(parmVal) * Math.Pow(10, iODBPSD.rdata.dec_val)));
+                    _ret = Focas1.cnc_wrparam(_flibhndl, length, iODBPSD);
+                    if (_ret == Focas1.EW_OK)
+                    {
+                        Print($"cnc_wrparam success");
+                    }
+                    else
+                    {
+                        Print($"cnc_wrparam error:{_ret}");
+                    }
+                }
+                //Focas1.cnc_wrparar()
+            }
+           
+
+        }
+
     }
 }

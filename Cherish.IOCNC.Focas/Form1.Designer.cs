@@ -38,6 +38,18 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.button39 = new System.Windows.Forms.Button();
+            this.button38 = new System.Windows.Forms.Button();
+            this.button37 = new System.Windows.Forms.Button();
+            this.button36 = new System.Windows.Forms.Button();
+            this.button35 = new System.Windows.Forms.Button();
+            this.button34 = new System.Windows.Forms.Button();
+            this.button33 = new System.Windows.Forms.Button();
+            this.button32 = new System.Windows.Forms.Button();
+            this.button31 = new System.Windows.Forms.Button();
+            this.button30 = new System.Windows.Forms.Button();
+            this.button29 = new System.Windows.Forms.Button();
+            this.button28 = new System.Windows.Forms.Button();
             this.button26 = new System.Windows.Forms.Button();
             this.button25 = new System.Windows.Forms.Button();
             this.button24 = new System.Windows.Forms.Button();
@@ -98,6 +110,21 @@
             this.btn_WriteToolGroup = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.num_ToolGrpNo = new System.Windows.Forms.NumericUpDown();
+            this.btn_AlarmMsg2 = new System.Windows.Forms.Button();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.txt_ParmValue = new System.Windows.Forms.TextBox();
+            this.chb_WithAxis = new System.Windows.Forms.CheckBox();
+            this.cmb_ParmType = new System.Windows.Forms.ComboBox();
+            this.button44 = new System.Windows.Forms.Button();
+            this.button43 = new System.Windows.Forms.Button();
+            this.button42 = new System.Windows.Forms.Button();
+            this.button41 = new System.Windows.Forms.Button();
+            this.button40 = new System.Windows.Forms.Button();
+            this.label17 = new System.Windows.Forms.Label();
+            this.num_ParamNum = new System.Windows.Forms.NumericUpDown();
+            this.button27 = new System.Windows.Forms.Button();
+            this.btn_rdParmNum = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.button5 = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
@@ -114,8 +141,6 @@
             this.num_DiagNum = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
             this.btn_RdDiagnoss = new System.Windows.Forms.Button();
-            this.btn_AlarmMsg2 = new System.Windows.Forms.Button();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.num_Path = new System.Windows.Forms.NumericUpDown();
             this.btn_SetPath = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -126,12 +151,6 @@
             this.btn_Clear = new System.Windows.Forms.Button();
             this.label13 = new System.Windows.Forms.Label();
             this.txt_Port = new System.Windows.Forms.TextBox();
-            this.button27 = new System.Windows.Forms.Button();
-            this.button28 = new System.Windows.Forms.Button();
-            this.button29 = new System.Windows.Forms.Button();
-            this.button30 = new System.Windows.Forms.Button();
-            this.button31 = new System.Windows.Forms.Button();
-            this.button32 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -149,13 +168,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.num_ToolNo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_ToolOrderNo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_ToolGrpNo)).BeginInit();
+            this.tabPage2.SuspendLayout();
+            this.groupBox9.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.num_ParamNum)).BeginInit();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_marcoValue)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_Length)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_MarcoNum)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_DiagNum)).BeginInit();
-            this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_Path)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_AxisNO)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_BitNum)).BeginInit();
@@ -239,8 +260,6 @@
             this.tabPage1.Controls.Add(this.groupBox7);
             this.tabPage1.Controls.Add(this.groupBox4);
             this.tabPage1.Controls.Add(this.groupBox3);
-            this.tabPage1.Controls.Add(this.groupBox2);
-            this.tabPage1.Controls.Add(this.groupBox1);
             this.tabPage1.Controls.Add(this.btn_AlarmMsg2);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
@@ -252,12 +271,18 @@
             // 
             // groupBox8
             // 
+            this.groupBox8.Controls.Add(this.button39);
+            this.groupBox8.Controls.Add(this.button38);
+            this.groupBox8.Controls.Add(this.button37);
+            this.groupBox8.Controls.Add(this.button36);
+            this.groupBox8.Controls.Add(this.button35);
+            this.groupBox8.Controls.Add(this.button34);
+            this.groupBox8.Controls.Add(this.button33);
             this.groupBox8.Controls.Add(this.button32);
             this.groupBox8.Controls.Add(this.button31);
             this.groupBox8.Controls.Add(this.button30);
             this.groupBox8.Controls.Add(this.button29);
             this.groupBox8.Controls.Add(this.button28);
-            this.groupBox8.Controls.Add(this.button27);
             this.groupBox8.Controls.Add(this.button26);
             this.groupBox8.Controls.Add(this.button25);
             this.groupBox8.Controls.Add(this.button24);
@@ -270,14 +295,134 @@
             this.groupBox8.Controls.Add(this.btn_RdOpMsg);
             this.groupBox8.Location = new System.Drawing.Point(20, 341);
             this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(951, 105);
+            this.groupBox8.Size = new System.Drawing.Size(951, 133);
             this.groupBox8.TabIndex = 9;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "操作履历";
             // 
+            // button39
+            // 
+            this.button39.Location = new System.Drawing.Point(747, 87);
+            this.button39.Name = "button39";
+            this.button39.Size = new System.Drawing.Size(116, 28);
+            this.button39.TabIndex = 52;
+            this.button39.Text = "历史报警信息";
+            this.button39.UseVisualStyleBackColor = true;
+            this.button39.Click += new System.EventHandler(this.button39_Click);
+            // 
+            // button38
+            // 
+            this.button38.Location = new System.Drawing.Point(598, 87);
+            this.button38.Name = "button38";
+            this.button38.Size = new System.Drawing.Size(116, 28);
+            this.button38.TabIndex = 51;
+            this.button38.Text = "历史报警数量";
+            this.button38.UseVisualStyleBackColor = true;
+            this.button38.Click += new System.EventHandler(this.button38_Click);
+            // 
+            // button37
+            // 
+            this.button37.Location = new System.Drawing.Point(443, 87);
+            this.button37.Name = "button37";
+            this.button37.Size = new System.Drawing.Size(116, 28);
+            this.button37.TabIndex = 50;
+            this.button37.Text = "清除报警";
+            this.button37.UseVisualStyleBackColor = true;
+            this.button37.Click += new System.EventHandler(this.button37_Click);
+            // 
+            // button36
+            // 
+            this.button36.Location = new System.Drawing.Point(311, 87);
+            this.button36.Name = "button36";
+            this.button36.Size = new System.Drawing.Size(116, 28);
+            this.button36.TabIndex = 49;
+            this.button36.Text = "RDALMMSG";
+            this.button36.UseVisualStyleBackColor = true;
+            this.button36.Click += new System.EventHandler(this.button36_Click);
+            // 
+            // button35
+            // 
+            this.button35.Location = new System.Drawing.Point(206, 87);
+            this.button35.Name = "button35";
+            this.button35.Size = new System.Drawing.Size(87, 28);
+            this.button35.TabIndex = 48;
+            this.button35.Text = "报警信息2";
+            this.button35.UseVisualStyleBackColor = true;
+            this.button35.Click += new System.EventHandler(this.button35_Click);
+            // 
+            // button34
+            // 
+            this.button34.Location = new System.Drawing.Point(109, 87);
+            this.button34.Name = "button34";
+            this.button34.Size = new System.Drawing.Size(87, 28);
+            this.button34.TabIndex = 47;
+            this.button34.Text = "报警信息";
+            this.button34.UseVisualStyleBackColor = true;
+            this.button34.Click += new System.EventHandler(this.button34_Click);
+            // 
+            // button33
+            // 
+            this.button33.Location = new System.Drawing.Point(11, 87);
+            this.button33.Name = "button33";
+            this.button33.Size = new System.Drawing.Size(87, 28);
+            this.button33.TabIndex = 46;
+            this.button33.Text = "报警状态";
+            this.button33.UseVisualStyleBackColor = true;
+            this.button33.Click += new System.EventHandler(this.button33_Click);
+            // 
+            // button32
+            // 
+            this.button32.Location = new System.Drawing.Point(598, 53);
+            this.button32.Name = "button32";
+            this.button32.Size = new System.Drawing.Size(136, 28);
+            this.button32.TabIndex = 45;
+            this.button32.Text = "清空操作信息历史";
+            this.button32.UseVisualStyleBackColor = true;
+            this.button32.Click += new System.EventHandler(this.button32_Click);
+            // 
+            // button31
+            // 
+            this.button31.Location = new System.Drawing.Point(206, 53);
+            this.button31.Name = "button31";
+            this.button31.Size = new System.Drawing.Size(96, 28);
+            this.button31.TabIndex = 44;
+            this.button31.Text = "当前操作信息3";
+            this.button31.UseVisualStyleBackColor = true;
+            this.button31.Click += new System.EventHandler(this.button31_Click);
+            // 
+            // button30
+            // 
+            this.button30.Location = new System.Drawing.Point(104, 53);
+            this.button30.Name = "button30";
+            this.button30.Size = new System.Drawing.Size(96, 28);
+            this.button30.TabIndex = 43;
+            this.button30.Text = "当前操作信息2";
+            this.button30.UseVisualStyleBackColor = true;
+            this.button30.Click += new System.EventHandler(this.button30_Click);
+            // 
+            // button29
+            // 
+            this.button29.Location = new System.Drawing.Point(456, 53);
+            this.button29.Name = "button29";
+            this.button29.Size = new System.Drawing.Size(136, 28);
+            this.button29.TabIndex = 42;
+            this.button29.Text = "操作信息历史";
+            this.button29.UseVisualStyleBackColor = true;
+            this.button29.Click += new System.EventHandler(this.button29_Click);
+            // 
+            // button28
+            // 
+            this.button28.Location = new System.Drawing.Point(311, 53);
+            this.button28.Name = "button28";
+            this.button28.Size = new System.Drawing.Size(136, 28);
+            this.button28.TabIndex = 41;
+            this.button28.Text = "操作历史信息数量";
+            this.button28.UseVisualStyleBackColor = true;
+            this.button28.Click += new System.EventHandler(this.button28_Click);
+            // 
             // button26
             // 
-            this.button26.Location = new System.Drawing.Point(11, 71);
+            this.button26.Location = new System.Drawing.Point(11, 53);
             this.button26.Name = "button26";
             this.button26.Size = new System.Drawing.Size(87, 28);
             this.button26.TabIndex = 39;
@@ -789,7 +934,7 @@
             this.groupBox3.Controls.Add(this.btn_WriteToolGroup);
             this.groupBox3.Controls.Add(this.label9);
             this.groupBox3.Controls.Add(this.num_ToolGrpNo);
-            this.groupBox3.Location = new System.Drawing.Point(532, 16);
+            this.groupBox3.Location = new System.Drawing.Point(140, 16);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(439, 252);
             this.groupBox3.TabIndex = 6;
@@ -967,6 +1112,181 @@
             0,
             0});
             // 
+            // btn_AlarmMsg2
+            // 
+            this.btn_AlarmMsg2.Location = new System.Drawing.Point(12, 27);
+            this.btn_AlarmMsg2.Name = "btn_AlarmMsg2";
+            this.btn_AlarmMsg2.Size = new System.Drawing.Size(106, 28);
+            this.btn_AlarmMsg2.TabIndex = 0;
+            this.btn_AlarmMsg2.Text = "报警信息乱码";
+            this.btn_AlarmMsg2.UseVisualStyleBackColor = true;
+            this.btn_AlarmMsg2.Click += new System.EventHandler(this.btn_AlarmMsg2_Click);
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.groupBox9);
+            this.tabPage2.Controls.Add(this.groupBox2);
+            this.tabPage2.Controls.Add(this.groupBox1);
+            this.tabPage2.Controls.Add(this.num_Path);
+            this.tabPage2.Controls.Add(this.btn_SetPath);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(1317, 474);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "宏变量|诊断号|参数";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // groupBox9
+            // 
+            this.groupBox9.Controls.Add(this.txt_ParmValue);
+            this.groupBox9.Controls.Add(this.chb_WithAxis);
+            this.groupBox9.Controls.Add(this.cmb_ParmType);
+            this.groupBox9.Controls.Add(this.button44);
+            this.groupBox9.Controls.Add(this.button43);
+            this.groupBox9.Controls.Add(this.button42);
+            this.groupBox9.Controls.Add(this.button41);
+            this.groupBox9.Controls.Add(this.button40);
+            this.groupBox9.Controls.Add(this.label17);
+            this.groupBox9.Controls.Add(this.num_ParamNum);
+            this.groupBox9.Controls.Add(this.button27);
+            this.groupBox9.Controls.Add(this.btn_rdParmNum);
+            this.groupBox9.Location = new System.Drawing.Point(19, 124);
+            this.groupBox9.Name = "groupBox9";
+            this.groupBox9.Size = new System.Drawing.Size(735, 90);
+            this.groupBox9.TabIndex = 11;
+            this.groupBox9.TabStop = false;
+            this.groupBox9.Text = "参数";
+            // 
+            // txt_ParmValue
+            // 
+            this.txt_ParmValue.Location = new System.Drawing.Point(445, 64);
+            this.txt_ParmValue.Name = "txt_ParmValue";
+            this.txt_ParmValue.Size = new System.Drawing.Size(179, 21);
+            this.txt_ParmValue.TabIndex = 17;
+            this.txt_ParmValue.Text = "2.22";
+            // 
+            // chb_WithAxis
+            // 
+            this.chb_WithAxis.AutoSize = true;
+            this.chb_WithAxis.Location = new System.Drawing.Point(379, 68);
+            this.chb_WithAxis.Name = "chb_WithAxis";
+            this.chb_WithAxis.Size = new System.Drawing.Size(48, 16);
+            this.chb_WithAxis.TabIndex = 16;
+            this.chb_WithAxis.Text = "带轴";
+            this.chb_WithAxis.UseVisualStyleBackColor = true;
+            // 
+            // cmb_ParmType
+            // 
+            this.cmb_ParmType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmb_ParmType.FormattingEnabled = true;
+            this.cmb_ParmType.Items.AddRange(new object[] {
+            "Bit",
+            "Byte",
+            "Word",
+            "2-Word",
+            "Real"});
+            this.cmb_ParmType.Location = new System.Drawing.Point(271, 64);
+            this.cmb_ParmType.Name = "cmb_ParmType";
+            this.cmb_ParmType.Size = new System.Drawing.Size(99, 20);
+            this.cmb_ParmType.TabIndex = 12;
+            // 
+            // button44
+            // 
+            this.button44.Location = new System.Drawing.Point(173, 61);
+            this.button44.Name = "button44";
+            this.button44.Size = new System.Drawing.Size(82, 23);
+            this.button44.TabIndex = 15;
+            this.button44.Text = "写入参数值";
+            this.button44.UseVisualStyleBackColor = true;
+            this.button44.Click += new System.EventHandler(this.button44_Click);
+            // 
+            // button43
+            // 
+            this.button43.Location = new System.Drawing.Point(588, 20);
+            this.button43.Name = "button43";
+            this.button43.Size = new System.Drawing.Size(146, 23);
+            this.button43.TabIndex = 14;
+            this.button43.Text = "读取多个参数值【范围】";
+            this.button43.UseVisualStyleBackColor = true;
+            this.button43.Click += new System.EventHandler(this.button43_Click);
+            // 
+            // button42
+            // 
+            this.button42.Location = new System.Drawing.Point(445, 20);
+            this.button42.Name = "button42";
+            this.button42.Size = new System.Drawing.Size(148, 23);
+            this.button42.TabIndex = 13;
+            this.button42.Text = "读取多个参数值【随机】";
+            this.button42.UseVisualStyleBackColor = true;
+            this.button42.Click += new System.EventHandler(this.button42_Click);
+            // 
+            // button41
+            // 
+            this.button41.Location = new System.Drawing.Point(358, 20);
+            this.button41.Name = "button41";
+            this.button41.Size = new System.Drawing.Size(82, 23);
+            this.button41.TabIndex = 12;
+            this.button41.Text = "读取参数值3";
+            this.button41.UseVisualStyleBackColor = true;
+            this.button41.Click += new System.EventHandler(this.button41_Click);
+            // 
+            // button40
+            // 
+            this.button40.Location = new System.Drawing.Point(271, 20);
+            this.button40.Name = "button40";
+            this.button40.Size = new System.Drawing.Size(82, 23);
+            this.button40.TabIndex = 11;
+            this.button40.Text = "读取参数值";
+            this.button40.UseVisualStyleBackColor = true;
+            this.button40.Click += new System.EventHandler(this.button40_Click);
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(188, 12);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(41, 12);
+            this.label17.TabIndex = 10;
+            this.label17.Text = "参数号";
+            // 
+            // num_ParamNum
+            // 
+            this.num_ParamNum.Location = new System.Drawing.Point(173, 27);
+            this.num_ParamNum.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.num_ParamNum.Name = "num_ParamNum";
+            this.num_ParamNum.Size = new System.Drawing.Size(84, 21);
+            this.num_ParamNum.TabIndex = 9;
+            this.num_ParamNum.Value = new decimal(new int[] {
+            27261,
+            0,
+            0,
+            0});
+            // 
+            // button27
+            // 
+            this.button27.Location = new System.Drawing.Point(89, 20);
+            this.button27.Name = "button27";
+            this.button27.Size = new System.Drawing.Size(75, 23);
+            this.button27.TabIndex = 2;
+            this.button27.Text = "参数信息";
+            this.button27.UseVisualStyleBackColor = true;
+            this.button27.Click += new System.EventHandler(this.button27_Click_1);
+            // 
+            // btn_rdParmNum
+            // 
+            this.btn_rdParmNum.Location = new System.Drawing.Point(8, 20);
+            this.btn_rdParmNum.Name = "btn_rdParmNum";
+            this.btn_rdParmNum.Size = new System.Drawing.Size(75, 23);
+            this.btn_rdParmNum.TabIndex = 1;
+            this.btn_rdParmNum.Text = "参数数量";
+            this.btn_rdParmNum.UseVisualStyleBackColor = true;
+            this.btn_rdParmNum.Click += new System.EventHandler(this.btn_rdParmNum_Click);
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.button5);
@@ -980,10 +1300,10 @@
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.num_MarcoNum);
             this.groupBox2.Controls.Add(this.button1);
-            this.groupBox2.Location = new System.Drawing.Point(20, 93);
+            this.groupBox2.Location = new System.Drawing.Point(292, 6);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(495, 160);
-            this.groupBox2.TabIndex = 5;
+            this.groupBox2.Size = new System.Drawing.Size(451, 114);
+            this.groupBox2.TabIndex = 10;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "宏变量";
             // 
@@ -1036,9 +1356,9 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(-1, 101);
+            this.button3.Location = new System.Drawing.Point(6, 85);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(118, 31);
+            this.button3.Size = new System.Drawing.Size(121, 21);
             this.button3.TabIndex = 8;
             this.button3.Text = "批量读取宏变量2";
             this.button3.UseVisualStyleBackColor = true;
@@ -1046,9 +1366,9 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(6, 61);
+            this.button2.Location = new System.Drawing.Point(9, 51);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(118, 31);
+            this.button2.Size = new System.Drawing.Size(118, 28);
             this.button2.TabIndex = 7;
             this.button2.Text = "批量读取宏变量";
             this.button2.UseVisualStyleBackColor = true;
@@ -1108,9 +1428,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(23, 20);
+            this.button1.Location = new System.Drawing.Point(16, 17);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(91, 31);
+            this.button1.Size = new System.Drawing.Size(81, 31);
             this.button1.TabIndex = 6;
             this.button1.Text = "读取宏变量";
             this.button1.UseVisualStyleBackColor = true;
@@ -1121,10 +1441,10 @@
             this.groupBox1.Controls.Add(this.num_DiagNum);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.btn_RdDiagnoss);
-            this.groupBox1.Location = new System.Drawing.Point(142, 16);
+            this.groupBox1.Location = new System.Drawing.Point(18, 17);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(259, 65);
-            this.groupBox1.TabIndex = 4;
+            this.groupBox1.Size = new System.Drawing.Size(259, 56);
+            this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "诊断号";
             // 
@@ -1164,31 +1484,9 @@
             this.btn_RdDiagnoss.UseVisualStyleBackColor = true;
             this.btn_RdDiagnoss.Click += new System.EventHandler(this.btn_RdDiagnoss_Click);
             // 
-            // btn_AlarmMsg2
-            // 
-            this.btn_AlarmMsg2.Location = new System.Drawing.Point(12, 27);
-            this.btn_AlarmMsg2.Name = "btn_AlarmMsg2";
-            this.btn_AlarmMsg2.Size = new System.Drawing.Size(106, 28);
-            this.btn_AlarmMsg2.TabIndex = 0;
-            this.btn_AlarmMsg2.Text = "报警信息乱码";
-            this.btn_AlarmMsg2.UseVisualStyleBackColor = true;
-            this.btn_AlarmMsg2.Click += new System.EventHandler(this.btn_AlarmMsg2_Click);
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.num_Path);
-            this.tabPage2.Controls.Add(this.btn_SetPath);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1317, 474);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
             // num_Path
             // 
-            this.num_Path.Location = new System.Drawing.Point(101, 66);
+            this.num_Path.Location = new System.Drawing.Point(110, 84);
             this.num_Path.Maximum = new decimal(new int[] {
             1000000,
             0,
@@ -1205,7 +1503,7 @@
             // 
             // btn_SetPath
             // 
-            this.btn_SetPath.Location = new System.Drawing.Point(20, 63);
+            this.btn_SetPath.Location = new System.Drawing.Point(29, 81);
             this.btn_SetPath.Name = "btn_SetPath";
             this.btn_SetPath.Size = new System.Drawing.Size(75, 23);
             this.btn_SetPath.TabIndex = 0;
@@ -1297,66 +1595,6 @@
             this.txt_Port.TabIndex = 12;
             this.txt_Port.Text = "8193";
             // 
-            // button27
-            // 
-            this.button27.Location = new System.Drawing.Point(772, 71);
-            this.button27.Name = "button27";
-            this.button27.Size = new System.Drawing.Size(136, 28);
-            this.button27.TabIndex = 40;
-            this.button27.Text = "操作信息历史信息";
-            this.button27.UseVisualStyleBackColor = true;
-            this.button27.Click += new System.EventHandler(this.button27_Click);
-            // 
-            // button28
-            // 
-            this.button28.Location = new System.Drawing.Point(311, 71);
-            this.button28.Name = "button28";
-            this.button28.Size = new System.Drawing.Size(136, 28);
-            this.button28.TabIndex = 41;
-            this.button28.Text = "操作历史信息数量";
-            this.button28.UseVisualStyleBackColor = true;
-            this.button28.Click += new System.EventHandler(this.button28_Click);
-            // 
-            // button29
-            // 
-            this.button29.Location = new System.Drawing.Point(456, 71);
-            this.button29.Name = "button29";
-            this.button29.Size = new System.Drawing.Size(136, 28);
-            this.button29.TabIndex = 42;
-            this.button29.Text = "操作信息历史";
-            this.button29.UseVisualStyleBackColor = true;
-            this.button29.Click += new System.EventHandler(this.button29_Click);
-            // 
-            // button30
-            // 
-            this.button30.Location = new System.Drawing.Point(104, 71);
-            this.button30.Name = "button30";
-            this.button30.Size = new System.Drawing.Size(96, 28);
-            this.button30.TabIndex = 43;
-            this.button30.Text = "当前操作信息2";
-            this.button30.UseVisualStyleBackColor = true;
-            this.button30.Click += new System.EventHandler(this.button30_Click);
-            // 
-            // button31
-            // 
-            this.button31.Location = new System.Drawing.Point(206, 71);
-            this.button31.Name = "button31";
-            this.button31.Size = new System.Drawing.Size(96, 28);
-            this.button31.TabIndex = 44;
-            this.button31.Text = "当前操作信息3";
-            this.button31.UseVisualStyleBackColor = true;
-            this.button31.Click += new System.EventHandler(this.button31_Click);
-            // 
-            // button32
-            // 
-            this.button32.Location = new System.Drawing.Point(598, 71);
-            this.button32.Name = "button32";
-            this.button32.Size = new System.Drawing.Size(136, 28);
-            this.button32.TabIndex = 45;
-            this.button32.Text = "清空操作信息历史";
-            this.button32.UseVisualStyleBackColor = true;
-            this.button32.Click += new System.EventHandler(this.button32_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1403,6 +1641,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.num_ToolNo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_ToolOrderNo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_ToolGrpNo)).EndInit();
+            this.tabPage2.ResumeLayout(false);
+            this.groupBox9.ResumeLayout(false);
+            this.groupBox9.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.num_ParamNum)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_marcoValue)).EndInit();
@@ -1411,7 +1653,6 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_DiagNum)).EndInit();
-            this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.num_Path)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_AxisNO)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_BitNum)).EndInit();
@@ -1434,27 +1675,11 @@
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btn_AlarmMsg2;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.NumericUpDown num_DiagNum;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button btn_RdDiagnoss;
         private System.Windows.Forms.NumericUpDown num_AxisNO;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.NumericUpDown num_BitNum;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btn_Clear;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.NumericUpDown num_MarcoNum;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.NumericUpDown num_Length;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.NumericUpDown num_marcoValue;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Button button5;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.NumericUpDown num_ToolGrpNo;
@@ -1520,12 +1745,47 @@
         private System.Windows.Forms.Button button24;
         private System.Windows.Forms.Button button25;
         private System.Windows.Forms.Button button26;
-        private System.Windows.Forms.Button button27;
         private System.Windows.Forms.Button button28;
         private System.Windows.Forms.Button button29;
         private System.Windows.Forms.Button button31;
         private System.Windows.Forms.Button button30;
         private System.Windows.Forms.Button button32;
+        private System.Windows.Forms.Button button33;
+        private System.Windows.Forms.Button button34;
+        private System.Windows.Forms.Button button35;
+        private System.Windows.Forms.Button button36;
+        private System.Windows.Forms.Button button37;
+        private System.Windows.Forms.Button button38;
+        private System.Windows.Forms.Button button39;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.NumericUpDown num_marcoValue;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.NumericUpDown num_Length;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.NumericUpDown num_MarcoNum;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.NumericUpDown num_DiagNum;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button btn_RdDiagnoss;
+        private System.Windows.Forms.GroupBox groupBox9;
+        private System.Windows.Forms.Button btn_rdParmNum;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.NumericUpDown num_ParamNum;
+        private System.Windows.Forms.Button button27;
+        private System.Windows.Forms.Button button40;
+        private System.Windows.Forms.Button button41;
+        private System.Windows.Forms.Button button42;
+        private System.Windows.Forms.Button button43;
+        private System.Windows.Forms.Button button44;
+        private System.Windows.Forms.ComboBox cmb_ParmType;
+        private System.Windows.Forms.CheckBox chb_WithAxis;
+        private System.Windows.Forms.TextBox txt_ParmValue;
     }
 }
 

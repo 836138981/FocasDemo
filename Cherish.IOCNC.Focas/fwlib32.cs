@@ -6,12 +6,14 @@
 /* Copyright (C) 2002-2011 by FANUC CORPORATION All rights reserved. */
 /*                                                                   */
 /*-------------------------------------------------------------------*/
+#define FS30D
 using System;
 using System.Runtime.InteropServices;
 
 
 public class Focas1
 {
+
     /* Axis define */
 #if FS30D
     public const short MAX_AXIS = 32;
@@ -1128,7 +1130,45 @@ public class Focas1
         public int prm_val;     /* data of real parameter */
         public int dec_val;     /* decimal point of real parameter */
     }
-#if M_AXIS2
+    //ÐÂÔö
+#if FS30D  
+    [StructLayout(LayoutKind.Sequential, Pack = 4)]
+    public class REALPRMS
+    {
+        public REALPRM rdata1 = new REALPRM();
+        public REALPRM rdata2 = new REALPRM();
+        public REALPRM rdata3 = new REALPRM();
+        public REALPRM rdata4 = new REALPRM();
+        public REALPRM rdata5 = new REALPRM();
+        public REALPRM rdata6 = new REALPRM();
+        public REALPRM rdata7 = new REALPRM();
+        public REALPRM rdata8 = new REALPRM();
+        public REALPRM rdata9 = new REALPRM();
+        public REALPRM rdata10 = new REALPRM();
+        public REALPRM rdata11 = new REALPRM();
+        public REALPRM rdata12 = new REALPRM();
+        public REALPRM rdata13 = new REALPRM();
+        public REALPRM rdata14 = new REALPRM();
+        public REALPRM rdata15 = new REALPRM();
+        public REALPRM rdata16 = new REALPRM();
+        public REALPRM rdata17 = new REALPRM();
+        public REALPRM rdata18 = new REALPRM();
+        public REALPRM rdata19 = new REALPRM();
+        public REALPRM rdata20 = new REALPRM();
+        public REALPRM rdata21 = new REALPRM();
+        public REALPRM rdata22 = new REALPRM();
+        public REALPRM rdata23 = new REALPRM();
+        public REALPRM rdata24 = new REALPRM();
+        public REALPRM rdata25 = new REALPRM();
+        public REALPRM rdata26 = new REALPRM();
+        public REALPRM rdata27 = new REALPRM();
+        public REALPRM rdata28 = new REALPRM();
+        public REALPRM rdata29 = new REALPRM();
+        public REALPRM rdata30 = new REALPRM();
+        public REALPRM rdata31 = new REALPRM();
+        public REALPRM rdata32 = new REALPRM();
+    } /* In case that the number of alarm is 32 */
+#elif M_AXIS2
     [StructLayout(LayoutKind.Sequential,Pack=4)]
     public class REALPRMS
     {
@@ -3342,7 +3382,7 @@ public class Focas1
     }
 
     /* cnc_rdalminfo:read alarm information */
-#if M_AXIS2
+#if M_AXIS2||FS30D
     [StructLayout(LayoutKind.Sequential,Pack=4)]
     public class ALMINFO1_data
     {
@@ -3365,6 +3405,8 @@ public class Focas1
     {
         public short axis;
         public short alm_no;
+
+
     }
 
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi, Pack = 4)]
@@ -8631,19 +8673,19 @@ public class Focas1
     /* read parameter(area specified) */
     [DllImport("FWLIB32.dll", EntryPoint = "cnc_rdparar")]
     public static extern short cnc_rdparar(ushort FlibHndl,
-        ref short a, short b, ref short c, ref short d, [Out, MarshalAs(UnmanagedType.AsAny)] Object e);
-    //  [DllImport("FWLIB32.dll", EntryPoint="cnc_rdparar")]
-    //  public static extern short cnc_rdparar( ushort FlibHndl,
-    //      ref short a, short b, ref short c, ref short d, [Out,MarshalAs(UnmanagedType.LPStruct)] IODBPSD_A e );
-    //  [DllImport("FWLIB32.dll", EntryPoint="cnc_rdparar")]
-    //  public static extern short cnc_rdparar( ushort FlibHndl,
-    //      ref short a, short b, ref short c, ref short d, [Out,MarshalAs(UnmanagedType.LPStruct)] IODBPSD_B e );
+        ref short a, ref short b, short c, ref short d, [Out, MarshalAs(UnmanagedType.AsAny)] Object e);
+    //[DllImport("FWLIB32.dll", EntryPoint = "cnc_rdparar")]
+    //public static extern short cnc_rdparar(ushort FlibHndl,
+    //    ref short a, ref short b, short c, ref short d, [Out, MarshalAs(UnmanagedType.LPStruct)] IODBPSD_A e);
+    //[DllImport("FWLIB32.dll", EntryPoint = "cnc_rdparar")]
+    //public static extern short cnc_rdparar(ushort FlibHndl,
+    //    ref short a, short b, ref short c, ref short d, [Out, MarshalAs(UnmanagedType.LPStruct)] IODBPSD_B e);
     //  [DllImport("FWLIB32.dll", EntryPoint="cnc_rdparar")]
     //  public static extern short cnc_rdparar( ushort FlibHndl,
     //      ref short a, short b, ref short c, ref short d, [Out,MarshalAs(UnmanagedType.LPStruct)] IODBPSD_C e );
-    //  [DllImport("FWLIB32.dll", EntryPoint="cnc_rdparar")]
-    //  public static extern short cnc_rdparar( ushort FlibHndl,
-    //      ref short a, short b, ref short c, ref short d, [Out,MarshalAs(UnmanagedType.LPStruct)] IODBPSD_D e );
+    //[DllImport("FWLIB32.dll", EntryPoint = "cnc_rdparar")]
+    //public static extern short cnc_rdparar(ushort FlibHndl,
+    //    ref short a, short b, ref short c, ref short d, [Out, MarshalAs(UnmanagedType.LPStruct)] IODBPSD_D e);
 
     /* write parameter(area specified) */
     [DllImport("FWLIB32.dll", EntryPoint = "cnc_wrparas")]
