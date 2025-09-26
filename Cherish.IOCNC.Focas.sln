@@ -5,6 +5,8 @@ VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cherish.IOCNC.Focas", "Cherish.IOCNC.Focas\Cherish.IOCNC.Focas.csproj", "{DB023EA1-02CD-465A-A459-D025EFCF569D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Focas.linux", "Focas.linux\Focas.linux.csproj", "{42BE5D17-ACC7-4E14-9BA7-34A33CFB8A0F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{DB023EA1-02CD-465A-A459-D025EFCF569D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DB023EA1-02CD-465A-A459-D025EFCF569D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DB023EA1-02CD-465A-A459-D025EFCF569D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42BE5D17-ACC7-4E14-9BA7-34A33CFB8A0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42BE5D17-ACC7-4E14-9BA7-34A33CFB8A0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42BE5D17-ACC7-4E14-9BA7-34A33CFB8A0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42BE5D17-ACC7-4E14-9BA7-34A33CFB8A0F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
